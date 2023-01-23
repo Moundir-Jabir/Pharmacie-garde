@@ -12,6 +12,10 @@ app.use(express.urlencoded({ extended: true })); //* this is meddleware
 app.use(express.json());
 app.use(coockieparser())
 
+const PharmacieRouter = require('./routes/PharmacieRouter')
+
+app.use('/api/pharmacie', PharmacieRouter)
+
 
 
 

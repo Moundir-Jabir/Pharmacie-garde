@@ -13,3 +13,4 @@ const createPharmacie = async (req, res) => {
 
 
 
+module.exports = {createPharmacie}
