@@ -137,5 +137,27 @@ const getPharmacieById = tryCatch(async (req, res) => {
      )
 })
 
+/**
+ * @api {delete} api/pharmacies/deletePharmacie/:id
+ * @apiName deletePharmacie
+ */
 
-module.exports = { createPharmacie, updatePharmacie, getAllPharmacie, getPharmacieById }
+const deletePharmacie = tryCatch(async (req, res) => {
+    const id = req.params.id
+
+    const pharmacie = await PharmacieModel.findByIdAndDelete({_id : id})
+
+    if(!pharmacie){
+        throw new Error('pharmacie not found')
+    }
+
+    return (
+        res.status(201).json({
+            pharmacie,
+            mess : 'pharmacie delete successfuly'
+        })
+    )
+})
+
+
+module.exports = { createPharmacie, updatePharmacie, getAllPharmacie, getPharmacieById, deletePharmacie}
