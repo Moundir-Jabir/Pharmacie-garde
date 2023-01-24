@@ -4,6 +4,7 @@ const { tryCatch } = require('../middlewares/tryCatch')
 
 
 
+
 /**
  * @api {post} api/pharmacies/createPharmacie 
  * @apiName createPharmacie
@@ -115,4 +116,26 @@ const getAllPharmacie = tryCatch(async (req, res) => {
 })
 
 
-module.exports = { createPharmacie, updatePharmacie, getAllPharmacie }
+/**
+ * @api {get} api/pharmacies/getPharmacieById/:id
+ * @apiName getPharmacieById
+ */
+
+const getPharmacieById = tryCatch(async (req, res) => {
+     const id = req.params.id
+
+     const pharmacie = await PharmacieModel.findById({_id : id})
+
+     if(!pharmacie){
+        throw new Error('not found')
+     }
+
+     return (
+        res.status(200).json({
+            pharmacie
+        })
+     )
+})
+
+
+module.exports = { createPharmacie, updatePharmacie, getAllPharmacie, getPharmacieById }
