@@ -50,6 +50,32 @@ const createPharmacie = asyncHandler(async (req, res) => {
 
 const updatePharmacie = asyncHandler(async (req, res) => {
     const id = req.params.id
+    
+    const { name, address, phone, date } = req.body
+
+    if (!name || !address || !phone || !date) {
+        res.status(400).json({
+            mess: 'Please Add All filed'
+        })
+    }
+
+    const img = [];
+        await req.files.forEach((filePath) => {
+            const path = filePath.path.split("\\")
+            console.log(path);
+            const imgPath = "/" + path[1];
+            img.push(imgPath);
+        });
+
+    const pharmacie = await PharmacieModel.findByIdAndUpdate({_id : id},
+        {
+            image : img,
+            name: name,
+            phone: phone,
+            address: address,
+            date: date
+        })
+
 
 
 })
@@ -66,7 +92,7 @@ const getAllPharmacie = asyncHandler(async (req, res) => {
         const pharmacie = await PharmacieModel.find({})
 
         res.status(200).json({ pharmacie })
-        
+
     } catch (err) {
         console.log(err);
     }
