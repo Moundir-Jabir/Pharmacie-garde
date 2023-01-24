@@ -1,7 +1,9 @@
 const router = require('express').Router()
-const {createPharmacie} = require('../controllers/PharmacieController')
+const {createPharmacie, updatePharmacie} = require('../controllers/PharmacieController')
+const {upload} = require('../middlewares/malter')
 
-router.post('/createPharmacie', createPharmacie)
+router.post('/createPharmacie', upload, createPharmacie)
+router.put('/updatePharmacie/:id', updatePharmacie)
 
 
 module.exports = router
