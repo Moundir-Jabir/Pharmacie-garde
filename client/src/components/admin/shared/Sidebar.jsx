@@ -34,7 +34,7 @@ function Sidebar() {
   const [open, setOpen] = useState(true);
   return (
     <div
-      className={`bg-gray-800 h-screen ${
+      className={`bg-color-secondary h-screen ${
         open ? "w-56" : "w-16"
       } duration-500 text-gray-100 px-3`}
     >

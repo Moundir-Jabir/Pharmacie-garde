@@ -7,7 +7,7 @@ function PharmacieTable() {
   return (
     <div className="flex flex-col gap-3">
       <div className="flex flex-row justify-between items-center align-middle bg-white px-4 pt-3 pb-4 rounded-sm border border-gray-200 flex-1">
-        <h1 className="text-2xl font-bold">Liste Pharmacies</h1>
+        <h1 className="text-2xl font-bold text-color-secondary">Liste Pharmacies</h1>
         <div className="flex flex-row gap-2">
           <div className="form-control">
             <div className="input-group ">
@@ -16,14 +16,14 @@ function PharmacieTable() {
                 placeholder="Search…"
                 className="input input-bordered  text-black"
               />
-              <button className="btn btn-square border-none bg-color-primary hover:bg-color-secondary ">
+              <button className="btn btn-square border-none hover:bg-color-primary bg-color-secondary ">
                 <BiSearch size={24} />
               </button>
             </div>
           </div>
           <Link
-            to={"#"}
-            className="btn btn-active border-none bg-color-primary hover:bg-color-secondary"
+            to={"/dashboard/pharmacieadd"}
+            className="btn btn-active border-none hover:bg-color-primary bg-color-secondary"
           >
             Ajouter Pharmacie
           </Link>

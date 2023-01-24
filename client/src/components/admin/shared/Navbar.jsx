@@ -5,7 +5,7 @@ import {
 
 function Navbar() {
   return (
-    <div className="navbar bg-gray-800 text-white">
+    <div className="navbar bg-color-secondary text-white">
       <div className="navbar-start">
       </div>
       <div className="navbar-end flex px-3">
