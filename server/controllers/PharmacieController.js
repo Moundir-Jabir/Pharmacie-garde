@@ -55,4 +55,22 @@ const updatePharmacie = asyncHandler(async (req, res) => {
 })
 
 
-module.exports = { createPharmacie, updatePharmacie }
+/**
+ * @api {get} api/pharmacies/getAllPharmacie
+ * @apiName getAllPharmacie
+ */
+
+const getAllPharmacie = asyncHandler(async (req, res) => {
+    try {
+
+        const pharmacie = await PharmacieModel.find({})
+
+        res.status(200).json({ pharmacie })
+        
+    } catch (err) {
+        console.log(err);
+    }
+})
+
+
+module.exports = { createPharmacie, updatePharmacie, getAllPharmacie }
