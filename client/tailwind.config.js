@@ -21,6 +21,8 @@ module.exports = {
       yellow: colors.yellow,
       red: colors.red,
       green: colors.green,
+      'color-primary': '#03c988',
+      'color-secondary': '#10A19D',
     },
     fontFamily: {
       main: ['Roboto', 'sans-serif'],
