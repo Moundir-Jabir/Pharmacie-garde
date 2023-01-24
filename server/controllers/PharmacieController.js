@@ -1,6 +1,7 @@
 const asyncHandler = require('express-async-handler')
 const PharmacieModel = require('../models/PharmacieModel')
 const { tryCatch } = require('../middlewares/tryCatch')
+const ErrorResponse = require('../utils/errorResp')
 
 
 
@@ -15,9 +16,7 @@ const createPharmacie = tryCatch(async (req, res) => {
     const { name, address, phone, date } = req.body
 
     if (!name || !address || !phone || !date) {
-        res.status(400).json({
-            mess: 'Please Add All filed'
-        })
+        return (new ErrorResponse('Please Add All filed', 400))
     }
 
     const img = [];
@@ -37,7 +36,7 @@ const createPharmacie = tryCatch(async (req, res) => {
     })
 
     if (!pharmacie) {
-        throw new Error('not created')
+        return (new ErrorResponse('pharmacie not created'), 400)
     }
 
     return (
@@ -62,9 +61,7 @@ const updatePharmacie = tryCatch(async (req, res) => {
     const { name, address, phone, date } = req.body
 
     if (!name || !address || !phone || !date) {
-        res.status(400).json({
-            mess: 'Please Add All filed'
-        })
+        return (new ErrorResponse('Please Add All filed', 400))
     }
 
     const img = [];
@@ -85,7 +82,7 @@ const updatePharmacie = tryCatch(async (req, res) => {
         })
 
         if (!pharmacie) {
-            throw new Error('pharmacie is not updated')
+            return (new ErrorResponse('pharmacie is not updated', 400))
         }
 
         return (
@@ -108,7 +105,7 @@ const getAllPharmacie = tryCatch(async (req, res) => {
     const pharmacie = await PharmacieModel.find({})
 
     if (!pharmacie) {
-        throw new Error('not found')
+        return (new ErrorResponse('not found', 400))
     }
 
     return res.status(200).json({ pharmacie })
@@ -127,7 +124,7 @@ const getPharmacieById = tryCatch(async (req, res) => {
      const pharmacie = await PharmacieModel.findById({_id : id})
 
      if(!pharmacie){
-        throw new Error('not found')
+        return (new ErrorResponse('not found', 400))
      }
 
      return (
@@ -148,7 +145,7 @@ const deletePharmacie = tryCatch(async (req, res) => {
     const pharmacie = await PharmacieModel.findByIdAndDelete({_id : id})
 
     if(!pharmacie){
-        throw new Error('pharmacie not found')
+        return (new ErrorResponse('pharmacie not found', 400))
     }
 
     return (
