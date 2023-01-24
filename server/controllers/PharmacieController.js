@@ -1,5 +1,7 @@
 const asyncHandler = require('express-async-handler')
 const PharmacieModel = require('../models/PharmacieModel')
+const { tryCatch } = require('../middlewares/tryCatch')
+
 
 
 /**
@@ -7,50 +9,8 @@ const PharmacieModel = require('../models/PharmacieModel')
  * @apiName createPharmacie
  */
 
-const createPharmacie = asyncHandler(async (req, res) => {
+const createPharmacie = tryCatch(async (req, res) => {
 
-    const { name, address, phone, date } = req.body
-
-    if (!name || !address || !phone || !date) {
-        res.status(400).json({
-            mess: 'Please Add All filed'
-        })
-    }
-    try {
-        const img = [];
-        await req.files.forEach((filePath) => {
-            const path = filePath.path.split("\\")
-            console.log(path);
-            const imgPath = "/" + path[1];
-            img.push(imgPath);
-        });
-
-        const pharmacie = await PharmacieModel.create({
-            image : img,
-            name: name,
-            phone: phone,
-            address: address,
-            date: date
-        })
-
-        res.status(201).json({
-            pharmacie
-        })
-
-    } catch (err) {
-        console.log(err);
-    }
-
-})
-
-/**
- * @api {put} api/pharmacies/updatePharmacie/:id
- * @apiName updatePharmacie
- */
-
-const updatePharmacie = asyncHandler(async (req, res) => {
-    const id = req.params.id
-    
     const { name, address, phone, date } = req.body
 
     if (!name || !address || !phone || !date) {
@@ -60,23 +20,79 @@ const updatePharmacie = asyncHandler(async (req, res) => {
     }
 
     const img = [];
-        await req.files.forEach((filePath) => {
-            const path = filePath.path.split("\\")
-            console.log(path);
-            const imgPath = "/" + path[1];
-            img.push(imgPath);
-        });
+    await req.files.forEach((filePath) => {
+        const path = filePath.path.split("\\")
+        console.log(path);
+        const imgPath = "/" + path[1];
+        img.push(imgPath);
+    });
 
-    const pharmacie = await PharmacieModel.findByIdAndUpdate({_id : id},
+    const pharmacie = await PharmacieModel.create({
+        image: img,
+        name: name,
+        phone: phone,
+        address: address,
+        date: date
+    })
+
+    if (!pharmacie) {
+        throw new Error('not created')
+    }
+
+    return (
+        res.status(201).json({
+            pharmacie,
+            mess: 'pharmacie cretae successfuly'
+        })
+    )
+
+
+
+})
+
+/**
+ * @api {put} api/pharmacies/updatePharmacie/:id
+ * @apiName updatePharmacie
+ */
+
+const updatePharmacie = tryCatch(async (req, res) => {
+    const id = req.params.id
+
+    const { name, address, phone, date } = req.body
+
+    if (!name || !address || !phone || !date) {
+        res.status(400).json({
+            mess: 'Please Add All filed'
+        })
+    }
+
+    const img = [];
+    await req.files.forEach((filePath) => {
+        const path = filePath.path.split("\\")
+        console.log(path);
+        const imgPath = "/" + path[1];
+        img.push(imgPath);
+    });
+
+    const pharmacie = await PharmacieModel.findByIdAndUpdate({ _id: id },
         {
-            image : img,
+            image: img,
             name: name,
             phone: phone,
             address: address,
             date: date
         })
 
+        if (!pharmacie) {
+            throw new Error('pharmacie is not updated')
+        }
 
+        return (
+            res.status(201).json({
+                pharmacie,
+                mess : 'pharmacie update successfuly'
+            })
+        )
 
 })
 
@@ -86,16 +102,16 @@ const updatePharmacie = asyncHandler(async (req, res) => {
  * @apiName getAllPharmacie
  */
 
-const getAllPharmacie = asyncHandler(async (req, res) => {
-    try {
+const getAllPharmacie = tryCatch(async (req, res) => {
 
-        const pharmacie = await PharmacieModel.find({})
+    const pharmacie = await PharmacieModel.find({})
 
-        res.status(200).json({ pharmacie })
-
-    } catch (err) {
-        console.log(err);
+    if (!pharmacie) {
+        throw new Error('not found')
     }
+
+    return res.status(200).json({ pharmacie })
+
 })
 
 

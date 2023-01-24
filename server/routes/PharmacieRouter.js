@@ -3,7 +3,7 @@ const {createPharmacie, updatePharmacie, getAllPharmacie} = require('../controll
 const {upload} = require('../middlewares/malter')
 
 router.post('/createPharmacie', upload, createPharmacie)
-router.put('/updatePharmacie/:id', updatePharmacie)
+router.put('/updatePharmacie/:id', upload, updatePharmacie)
 router.get('/getAllPharmacie', getAllPharmacie)
 
 
