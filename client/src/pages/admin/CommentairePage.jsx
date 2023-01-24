@@ -1,9 +1,13 @@
-import React from 'react'
+import React from "react";
+import CommentaireTable from "../../components/admin/tables/CommentaireTable";
+
 
 function CommentairePage() {
   return (
-    <div>CommentairePage</div>
-  )
+    <div>
+      <CommentaireTable />
+    </div>
+  );
 }
 
-export default CommentairePage
+export default CommentairePage;

@@ -1,9 +1,13 @@
-import React from 'react'
+import React from "react";
+import PharmacieTable from "../../components/admin/tables/PharmacieTable";
+
 
 function PharmaciePage() {
   return (
-    <div>PharmaciePage</div>
-  )
+    <div>
+      <PharmacieTable />
+    </div>
+  );
 }
 
-export default PharmaciePage
+export default PharmaciePage;
