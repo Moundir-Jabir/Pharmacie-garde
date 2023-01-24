@@ -1,6 +1,7 @@
-import React from 'react'
+import React from "react";
 import { Link } from "react-router-dom";
 import { BiSearch } from "../../../assets/icons";
+import Pharmacie1 from "../../../assets/images/Pharmacie1.png";
 
 function PharmacieTable() {
   return (
@@ -32,7 +33,7 @@ function PharmacieTable() {
         <table className="table table-compact w-full">
           <thead>
             <tr>
-              <th>ID</th>
+              <th>image</th>
               <th>Nom</th>
               <th>Adresse</th>
               <th>téléphone</th>
@@ -42,7 +43,16 @@ function PharmacieTable() {
           </thead>
           <tbody>
             <tr>
-              <td>1000</td>
+              <td>
+                <div className="avatar">
+                  <div className="mask mask-squircle w-12 h-12">
+                    <img
+                      src={Pharmacie1}
+                      alt="Avatar Tailwind CSS Component"
+                    />
+                  </div>
+                </div>
+              </td>
               <td>test</td>
               <td>test</td>
               <td>test</td>
@@ -54,9 +64,7 @@ function PharmacieTable() {
                 >
                   Modifier
                 </Link>
-                <button
-                  className="btn btn-ghost btn-xs bg-red-600 text-white"
-                >
+                <button className="btn btn-ghost btn-xs bg-red-600 text-white">
                   Suprimer
                 </button>
               </td>
@@ -65,7 +73,7 @@ function PharmacieTable() {
         </table>
       </div>
     </div>
-  )
+  );
 }
 
-export default PharmacieTable
+export default PharmacieTable;
