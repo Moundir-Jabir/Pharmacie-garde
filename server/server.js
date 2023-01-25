@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
+const errorHandler = require('./middlewares/errorHandler')
 
 
 
@@ -17,6 +18,7 @@ const PharmacieRouter = require('./routes/PharmacieRouter')
 app.use('/api/pharmacie', PharmacieRouter)
 
 
+app.use(errorHandler)
 
 
 
@@ -28,4 +30,3 @@ app.listen(port,(err)=>{
     if(err) throw err;
     console.log(`Server is running on port ${port}`);
 });
-

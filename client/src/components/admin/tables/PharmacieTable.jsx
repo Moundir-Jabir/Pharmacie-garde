@@ -2,12 +2,12 @@ import {useEffect} from "react";
 import { Link } from "react-router-dom";
 import { BiSearch } from "../../../assets/icons";
 import Pharmacie1 from "../../../assets/images/Pharmacie1.png";
-import {getPharmacie}from "../../../features/pharmacie/pharmacieSlice"
+import {getPharmacie,deletePharmacie}from "../../../features/pharmacie/pharmacieSlice"
 import {useDispatch, useSelector} from "react-redux"
 
 function PharmacieTable() {
 
-  const {pharmacies,loading}= useSelector(state=>state.pharmacie) 
+const {pharmacies,loading}= useSelector(state=>state.pharmacie) 
 const dispatch = useDispatch()
 
 useEffect(()=>{
@@ -45,14 +45,15 @@ useEffect(()=>{
             <tr>
               <th>image</th>
               <th>Nom</th>
-              <th>Adresse</th>
+              <th>Adress</th>
               <th>téléphone</th>
               <th>heures d'ouverture</th>
               <th>Option</th>
             </tr>
           </thead>
           <tbody>
-            { loading? "loading....": pharmacies.map(phar =>(
+            {
+            loading? "loading....": pharmacies.map(phar =>(
             <tr>
               <td>
                 <div className="avatar">
@@ -67,7 +68,7 @@ useEffect(()=>{
               
               
               <td>{phar.name}</td>
-              <td>{phar.adresse}</td>
+              <td>{phar.address}</td>
               <td>{phar.phone}</td>
               <td>{phar.date.slice(0,10)}</td>
               <td className="flex flex-row gap-2">
@@ -77,7 +78,7 @@ useEffect(()=>{
                 >
                   Modifier
                 </Link>
-                <button className="btn btn-ghost btn-xs bg-red-600 text-white">
+                <button className="btn btn-ghost btn-xs bg-red-600 text-white" onClick={()=> dispatch(deletePharmacie(phar._id))}>
                   Suprimer
                 </button>
               </td>
