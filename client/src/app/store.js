@@ -1,15 +1,12 @@
-
 import { configureStore } from "@reduxjs/toolkit";
-import item, {fetchItems, postItem, putItem, deleteItemApi} from "./itemSlice";
+import pharmReducer from "../features/pharmacie/pharmacieSlice"
 
 const store = configureStore({
   reducer: {
-    item
+    pharmacie : pharmReducer
+    
   }
 });
 
-export const {dispatch} = store;
+export default store
 
-export const {fetchItems, postItem, putItem, deleteItemApi} = {fetchItems, postItem, putItem, deleteItemApi}
-
-export default store;

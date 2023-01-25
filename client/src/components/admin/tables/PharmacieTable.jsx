@@ -1,9 +1,19 @@
-import React from "react";
+import {useEffect} from "react";
 import { Link } from "react-router-dom";
 import { BiSearch } from "../../../assets/icons";
 import Pharmacie1 from "../../../assets/images/Pharmacie1.png";
+import {getPharmacie}from "../../../features/pharmacie/pharmacieSlice"
+import {useDispatch, useSelector} from "react-redux"
 
 function PharmacieTable() {
+
+  const {pharmacies,loading}= useSelector(state=>state.pharmacie) 
+const dispatch = useDispatch()
+
+useEffect(()=>{
+  dispatch(getPharmacie())
+},[])
+
   return (
     <div className="flex flex-col gap-3">
       <div className="flex flex-row justify-between items-center align-middle bg-white px-4 pt-3 pb-4 rounded-sm border border-gray-200 flex-1">
@@ -42,6 +52,7 @@ function PharmacieTable() {
             </tr>
           </thead>
           <tbody>
+            { loading? "loading....": pharmacies.map(phar =>(
             <tr>
               <td>
                 <div className="avatar">
@@ -53,10 +64,12 @@ function PharmacieTable() {
                   </div>
                 </div>
               </td>
-              <td>test</td>
-              <td>test</td>
-              <td>test</td>
-              <td>test</td>
+              
+              
+              <td>{phar.name}</td>
+              <td>{phar.adresse}</td>
+              <td>{phar.phone}</td>
+              <td>{phar.date.slice(0,10)}</td>
               <td className="flex flex-row gap-2">
                 <Link
                   to={"#"}
@@ -69,6 +82,7 @@ function PharmacieTable() {
                 </button>
               </td>
             </tr>
+  ))}
           </tbody>
         </table>
       </div>
