@@ -5,6 +5,7 @@ import {LoginPage,ResetPasswordPage,ForgetPasswordPage,} from './pages/auth/inde
 import Layout from './components/admin/shared/Layout';
 import{HomePage,PharmaciePage,CommentairePage} from './pages/admin/index'
 import {PharmacieAdd} from './components/admin/post/index'
+import PharmacieUpdate from './components/admin/post/PharmacieUpdate'
 
 function App() {
   return (
@@ -18,6 +19,8 @@ function App() {
             <Route path='pharmacies' element={<PharmaciePage />} />
             <Route path='commentaires' element={<CommentairePage />} />
             <Route path='pharmacieadd' element={<PharmacieAdd />} />
+            <Route path='pharmacieupdate' element={<PharmacieUpdate />} />
+
           </Route>
       </Routes>
     </div>

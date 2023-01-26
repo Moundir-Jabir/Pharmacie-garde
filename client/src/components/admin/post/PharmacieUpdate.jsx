@@ -1,10 +1,10 @@
 import {useState } from "react";
 import { Input, Button } from "../shared/index";
 import { Link } from "react-router-dom";
-import {postPharmacie} from '../../../features/pharmacie/pharmacieSlice'
+import {updatePharmacie} from '../../../features/pharmacie/pharmacieSlice'
 import {useDispatch} from 'react-redux'
 
-function PharmacieAdd() {
+function PharmacieUpdate() {
 
   const [pharImage, setpharImage] = useState('')
   const [name, setName] = useState('')
@@ -29,7 +29,7 @@ const handlSubmit = (e)=>{
 
   console.log(data);
 
-  dispatch(postPharmacie(data));
+  dispatch(updatePharmacie(data));
    
 
 }
@@ -37,7 +37,7 @@ const handlSubmit = (e)=>{
   return (
     <div className="flex flex-col gap-3">
       <div className="flex flex-row justify-between items-center align-middle bg-white px-4 pt-3 pb-4 rounded-sm border border-gray-200 flex-1">
-        <h1 className="text-2xl font-bold text-color-secondary">Ajouter Pharmacie</h1>
+        <h1 className="text-2xl font-bold text-color-secondary">Update Pharmacie</h1>
         <Link
           to={"/dashboard/pharmacies"}
           className="btn btn-active border-none hover:bg-color-primary bg-color-secondary "
@@ -118,4 +118,4 @@ const handlSubmit = (e)=>{
   );
 }
 
-export default PharmacieAdd;
+export default PharmacieUpdate;

@@ -1,6 +1,8 @@
 const asyncHandler = require('express-async-handler')
 const PharmacieModel = require('../models/PharmacieModel')
 const { tryCatch } = require('../middlewares/tryCatch')
+const path = require('path')
+
 
 
 
@@ -19,9 +21,11 @@ const createPharmacie = tryCatch(async (req, res) => {
             mess: 'Please Add All filed'
         })
     }
+    
+
 
     const img = [];
-    await req.files.forEach((filePath) => {
+    await req.files?.forEach((filePath) => {
         const path = filePath.path.split("\\")
         console.log(path);
         const imgPath = "/" + path[1];
