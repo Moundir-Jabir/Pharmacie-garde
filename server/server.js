@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(coockieparser())
 
 const PharmacieRouter = require('./routes/PharmacieRouter')
-
+const Authentification = require('./routes/AuthRouter')
 
 app.use('/api/auth', Authentification);
 app.use('/api/pharmacie', PharmacieRouter)
