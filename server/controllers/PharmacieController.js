@@ -18,9 +18,11 @@ const createPharmacie = tryCatch(async (req, res) => {
     if (!name || !address || !phone || !date) {
       res.status(400).json({mess : 'Add All fileds'})
     }
+    
+
 
     const img = [];
-    await req.files.forEach((filePath) => {
+    await req.files?.forEach((filePath) => {
         const path = filePath.path.split("\\")
         console.log(path);
         const imgPath = "/" + path[1];

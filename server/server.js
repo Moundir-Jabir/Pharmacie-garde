@@ -2,8 +2,6 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const errorHandler = require('./middlewares/errorHandler')
-const connectDB = require('./Config/db')
-connectDB()
 
 
 
@@ -17,6 +15,8 @@ app.use(coockieparser())
 
 const PharmacieRouter = require('./routes/PharmacieRouter')
 
+
+app.use('/api/auth', Authentification);
 app.use('/api/pharmacie', PharmacieRouter)
 
 
@@ -32,5 +32,3 @@ app.listen(port,(err)=>{
     console.log(`Server is running on port ${port}`);
 });
 
-
-module.exports = app
