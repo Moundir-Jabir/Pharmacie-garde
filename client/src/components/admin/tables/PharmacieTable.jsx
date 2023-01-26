@@ -73,7 +73,7 @@ useEffect(()=>{
               <td>{phar.date.slice(0,10)}</td>
               <td className="flex flex-row gap-2">
                 <Link
-                  to={"#"}
+                  to={"/dashboard/pharmacieupdate"}
                   className="btn btn-ghost btn-xs bg-color-primary text-white"
                 >
                   Modifier

@@ -21,6 +21,13 @@ export const deletePharmacie = createAsyncThunk('pharmacie/deletePharmacie', asy
 });
 
 
+export const updatePharmacie = createAsyncThunk('pharmacie/deletePharmacie', async (id) => {
+    const res = await axios.delete(`http://localhost:8080/api/pharmacie/updatePharmacie/${id}`);
+ //    console.log(res.data.pharmacie);
+     return id;
+ });
+
+
 
 const pharmacieSlice = createSlice({
     name :"pharmacie",
@@ -53,6 +60,7 @@ const pharmacieSlice = createSlice({
             console.log("pending",state.loading);
         },
         [postPharmacie.fulfilled]: (state,{payload})=>{
+
             return{
                 ...state,
                 pharmacies : [...state.pharmacies, payload],
@@ -70,7 +78,6 @@ const pharmacieSlice = createSlice({
             console.log("pending",state.loading);
         },
         [deletePharmacie.fulfilled]: (state,{payload})=>{
-            console.log(payload);
             return{
                 ...state,
               pharmacies:state.pharmacies.filter(phar => phar._id !== payload ),
@@ -79,7 +86,30 @@ const pharmacieSlice = createSlice({
         },
         [deletePharmacie.rejected]:()=>{
             console.log("response rejected");
-        }
+        },
+
+         //updatePharmacie
+
+        //  [updatePharmacie.pending]:(state)=>{
+        //     state.loading = true
+        //     console.log("pending",state.loading);
+        // },
+        // [updatePharmacie.fulfilled]: (state,{payload})=>{
+        //     console.log(payload);
+        //     return{
+        //         ...state,
+        //       pharmacies:state.pharmacies.map(phar => {
+        //         if(phar._id== payload._id){
+        //             phar.adress =payload.adress;
+        //             phar.
+        //         }
+        //       } ),
+        //         loading: false
+        //     }
+        // },
+        // [updatePharmacie.rejected]:()=>{
+        //     console.log("response rejected");
+        // }
 
     }
 })
