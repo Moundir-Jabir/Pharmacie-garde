@@ -2,6 +2,8 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 
+const Authentification = require('./routes/AuthRouter');
+
 
 
 const cors = require('cors');
@@ -14,6 +16,8 @@ app.use(coockieparser())
 
 const PharmacieRouter = require('./routes/PharmacieRouter')
 
+
+app.use('/api/auth', Authentification);
 app.use('/api/pharmacie', PharmacieRouter)
 
 
