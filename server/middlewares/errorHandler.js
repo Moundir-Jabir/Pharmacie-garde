@@ -1,22 +1,13 @@
-const ErrorRespose = require('../utils/errorResp')
-
 const errorHandler = (err, req, res, next) => {
-    let error = {...err};
-    error.message = err.message;
+    const statusCode = res.statusCode ? res.statusCode : 500
 
-    if(err.code === 11000) {
-        const message = `Duplicate Field Value Enter`;
-        error = new ErrorResponse(message , 400)
-    }
+    res.status(statusCode)
 
-    if(err.name ==="ValidationError") {
-        const message = Object.values(err.errors).map((val)=>val.message);
-        error = new ErrorResponse(message, 400)
-    }
-    res.status(error.statusCode || 500).json({
-        succes:false,
-        error:error.message || "Server Error"
+    res.json({
+            message: err.message,
+            stack: process.env.NODE_ENV === 'production' ? null : err.stack
     })
 }
+
 
 module.exports = errorHandler
