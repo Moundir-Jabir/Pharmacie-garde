@@ -27,8 +27,7 @@ const handlSubmit = (e)=>{
   data.append('phone', phone) 
   data.append('date', date) 
 
-  console.log(data);
-
+  
   dispatch(postPharmacie(data));
    
 

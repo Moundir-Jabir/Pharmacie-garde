@@ -19,7 +19,7 @@ function App() {
             <Route path='pharmacies' element={<PharmaciePage />} />
             <Route path='commentaires' element={<CommentairePage />} />
             <Route path='pharmacieadd' element={<PharmacieAdd />} />
-            <Route path='pharmacieupdate' element={<PharmacieUpdate />} />
+            <Route path='pharmacieupdate/:id' element={<PharmacieUpdate />} />
 
           </Route>
       </Routes>

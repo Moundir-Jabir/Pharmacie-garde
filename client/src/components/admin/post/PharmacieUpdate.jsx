@@ -1,16 +1,62 @@
-import {useState } from "react";
+import {useState,useEffect } from "react";
 import { Input, Button } from "../shared/index";
-import { Link } from "react-router-dom";
+import {Link, useParams ,useNavigate} from 'react-router-dom'
 import {updatePharmacie} from '../../../features/pharmacie/pharmacieSlice'
 import {useDispatch} from 'react-redux'
+import axios from "axios"
+
 
 function PharmacieUpdate() {
+  
+  const navigate = useNavigate()
+  const params = useParams()
 
-  const [pharImage, setpharImage] = useState('')
-  const [name, setName] = useState('')
+  const [data, setData] = useState();
+  
+  // const [image, setimage] = useState('')
+  const [name, setname] = useState('')
   const [address, setaddress] = useState('')
   const [phone, setphone] = useState('')
   const [date, setdate] = useState('')
+
+
+  useEffect(() => {
+    axios.get(`http://localhost:8080/api/pharmacie/getPharmacieById/${params.id}`)
+        .then((response) => {
+          setData(response.data.pharmacie)
+        })
+        .catch((error) => {
+             console.log(error)
+        })
+}, [params.id])
+
+// console.log(data);
+
+  //   const handleimage = (event) => {
+  //   setimage(event.target.value)
+  //   setData(event.target.value);
+  // } 
+
+  const handlename = (event) => {
+    setname(event.target.value)
+    setData(event.target.value);
+  } 
+
+  const handleaddress = (event) => {
+    setaddress(event.target.value)
+    setData(event.target.value);
+  } 
+
+  
+  const handlephone = (event) => {
+    setphone(event.target.value)
+    setData(event.target.value);
+  }
+  
+  const handledate = (event) => {
+    setdate(event.target.value)
+    setData(event.target.value);
+  } 
 
   
 
@@ -19,18 +65,14 @@ const dispatch = useDispatch()
 
 const handlSubmit = (e)=>{
   e.preventDefault();
+  const dataUp = new FormData()
+  // dataUp.append('image', image)
+  dataUp.append('name', name) 
+  dataUp.append('address',address) 
+  dataUp.append('phone',phone) 
+  dataUp.append('date',date)
   
-  const data = new FormData()
-  data.append('image', pharImage)
-  data.append('name', name) 
-  data.append('address', address) 
-  data.append('phone', phone) 
-  data.append('date', date) 
-
-  console.log(data);
-
-  dispatch(updatePharmacie(data));
-   
+  dispatch(updatePharmacie({params,dataUp}));
 
 }
 
@@ -48,25 +90,30 @@ const handlSubmit = (e)=>{
       <div className="overflow-auto flex flex-col items-center bg-white px-4 pt-3 pb-4 rounded-sm border border-gray-200 flex-1">
         <div className="w-1/2">
           <form onSubmit={handlSubmit}>
-            <div>
+            {/* <div>
               <label className="label text-xs font-medium">
                 Image de pharmacie
               </label>
               <Input
                 type="file"
-                onChange={(e) => { setpharImage(e.target.files[0]) }}
+
+                onChange={ handleimage }
+                value={data?.image}
                 name="Name_Immeuble"
                 id="Name_Immeuble"
                 placeholder=""
+
               />
-            </div>
+            </div> */}
             <div>
               <label className="label text-xs font-medium">
                 Nom de pharmacie
               </label>
               <Input
                 type="text"
-                onChange={(e) => { setName(e.target.value) }}
+                value={data?.name}
+
+                onChange={ handlename }
                 name="Name_Immeuble"
                 id="Name_Immeuble"
                 placeholder=""
@@ -75,8 +122,8 @@ const handlSubmit = (e)=>{
             <div>
               <label className="label text-xs font-medium">Adresse</label>
               <Input
-                onChange={(e) => { setaddress(e.target.value) }}
-
+                onChange={ handleaddress }
+                 value={data?.address}
                 type="text"
                 name="Number_Appartement"
                 id="Number_Appartement"
@@ -88,7 +135,8 @@ const handlSubmit = (e)=>{
                 Numéro de téléphone
               </label>
               <Input
-                onChange={(e) => { setphone(e.target.value) }}
+                onChange={ handlephone }
+                value={data?.phone}
                 type="text"
                 name="Number_Appartement"
                 id="Number_Appartement"
@@ -100,9 +148,10 @@ const handlSubmit = (e)=>{
                 date
               </label>
               <Input
-                onChange={(e) => { setdate(e.target.value) }}
-                type="datetime-local"
+                onChange={ handledate }
+                type="date"
                 name="Number_Appartement"
+                value={data?.date?.slice(0,10)}
                 id="Number_Appartement"
                 placeholder=""
               />
@@ -116,6 +165,7 @@ const handlSubmit = (e)=>{
       </div>
     </div>
   );
+
 }
 
 export default PharmacieUpdate;
