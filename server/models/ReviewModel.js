@@ -4,11 +4,12 @@ const Schema = mongoose.Schema
 
 const ReviewSchema = new Schema({
     review : {
-        type : String,
-        required : true
+        type : Number,
+        required : true,
+        enum: [0,1,2,3,4,5]
     },
     idPharamcie : {
-        type : mongoose.Schema.Types.ObjectId, 
+        type : mongoose.Types.ObjectId, 
         ref: 'PharmacieModel'
     }
 })
