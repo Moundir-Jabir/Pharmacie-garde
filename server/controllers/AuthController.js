@@ -56,7 +56,7 @@ const login = asyncHandler(async (req, res) => {
                 name: admin.name,
                 email: admin.email,
                 token: tokengenerat,
-                role : admin.role
+                role: admin.role
             })
             return res.status(200)
         } else {
@@ -67,6 +67,48 @@ const login = asyncHandler(async (req, res) => {
     }
 })
 
+
+// method : post
+// url : api/auth/forgetpassword
+// acces : Public
+const forgetPassword = asyncHandler(async (req, res) => {
+    const { email } = req.body
+    if (!email) {
+        return res.status(400).json({ message: 'Please ADD field' })
+    }
+    const admin = await Admin.findOne({ email })
+    if (admin) {
+        let token = generateToken(admin._id)
+        admin.token = token
+        admin.save()
+        await resetPasswordEmail(admin.name, admin.email, admin.token)
+        return res.status(200).send('plaise check your email for reset your password of email')
+    }
+    return res.status(400).json({ message: 'Invalid email' })
+})
+
+// method : post
+// url : api/auth/resetpassword/:token
+// acces : Public
+const resetPassword = asyncHandler(async (req, res) => {
+    const token = req.params.token
+    const { password, password2 } = req.body
+    if (!password || !password2) {
+        return res.status(400).json({ message: 'Please ADD field' })
+    } else if (password != password2) { return res.status(400).json({ message: 'Password not match' }) }
+
+    const admin = await Admin.findOne({ token })
+    if (admin) {
+        const salt = await bcrypt.genSalt(10)
+        const hashedPassword = await bcrypt.hash(password, salt)
+        admin.password = hashedPassword
+        admin.save()
+        return res.status(200).json({ message: 'Your Password is Reset' })
+    } else {
+        return res.status(400).json({ message: 'Token not valide' })
+    }
+})
+
 // Generate JSON WEB TOKEN (JWT)
 const generateToken = (id) => {
     return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -74,4 +116,4 @@ const generateToken = (id) => {
     })
 }
 
-module.exports = { register, login }
+module.exports = { register, login, forgetPassword, resetPassword }
