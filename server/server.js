@@ -3,7 +3,6 @@ const express = require('express');
 const app = express();
 const errorHandler = require('./middlewares/errorHandler')
 
-const Authentification = require('./routes/AuthRouter');
 
 
 
@@ -16,10 +15,11 @@ app.use(express.json());
 app.use(coockieparser())
 
 const PharmacieRouter = require('./routes/PharmacieRouter')
+const Authentification = require('./routes/AuthRouter');
 
 
 app.use('/api/auth', Authentification);
-app.use('/api/pharmacie', PharmacieRouter)
+app.use('/api/pharmacie', PharmacieRouter);
 
 
 app.use(errorHandler)
