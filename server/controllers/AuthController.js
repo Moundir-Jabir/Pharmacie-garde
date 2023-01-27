@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const asyncHandler = require('express-async-handler');
 const Admin = require('../models/AuthModel');
 const cookie = require('cookie-parser')
+const resetPasswordEmail = require('../utils/SendEmail')
 
 // method : post
 // url : api/auth/register
@@ -55,5 +56,26 @@ const login = asyncHandler(async (req, res) => {
     }
 })
 
+// method : post
+// url : api/auth/forgetpassword
+// acces : Public
+const forgetPassword = asyncHandler(async (req, res) => {
+    const { email } = req.body
+    if (!email) {
+        return res.status(400).json({ message: 'Please ADD field' })
+    }
+    const admin = await Admin.findOne({ email })
+    if (admin) {
+        let token = generateToken(admin._id)
+        token = token.split(".").join("")
+        admin.token = token
+        admin.save()
+        await resetPasswordEmail(admin.name, admin.email, admin.token)
+        res.status(200).send('plaise check your email for reset your password of email')
+        return
+    }
+    return res.status(400).json({ message: 'Invalid email' })
+})
 
-module.exports = { register, login };
+
+module.exports = { register, login, forgetPassword };
