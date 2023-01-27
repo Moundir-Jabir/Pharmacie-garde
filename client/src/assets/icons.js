@@ -20,6 +20,8 @@ import { AiOutlineHome } from "react-icons/ai";
 import { TfiComment } from "react-icons/tfi";
 import { TfiHeartBroken } from "react-icons/tfi";
 import { BiLogOutCircle } from "react-icons/bi";
+import { AiOutlineStar } from "react-icons/ai";
+import { BiPlusMedical } from "react-icons/bi";
 
 
 export {
@@ -45,5 +47,7 @@ export {
     AiOutlineHome,
     TfiComment,
     TfiHeartBroken,
-    BiLogOutCircle
+    BiLogOutCircle,
+    AiOutlineStar,
+    BiPlusMedical
 };
