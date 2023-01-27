@@ -1,7 +1,6 @@
 const asyncHandler = require('express-async-handler')
 const PharmacieModel = require('../models/PharmacieModel')
 const { tryCatch } = require('../middlewares/tryCatch')
-const ErrorResponse = require('../utils/errorResp')
 
 
 
@@ -13,7 +12,11 @@ const ErrorResponse = require('../utils/errorResp')
 
 const createPharmacie = tryCatch(async (req, res) => {
 
+   
+
     const { name, address, phone, date } = req.body
+
+    console.log(req.body);
 
     if (!name || !address || !phone || !date) {
       res.status(400).json({mess : 'Add All fileds'})
@@ -36,6 +39,8 @@ const createPharmacie = tryCatch(async (req, res) => {
         address: address,
         date: date
     })
+
+    console.log(pharmacie);
 
     if (!pharmacie) {
         res.status(400).json({mess :'pharmacie not created' })
