@@ -24,4 +24,4 @@ const resetPasswordEmail = (name, email, token) => {
     }).catch(err => console.log(err));
 }
 
-module.exports = {resetPasswordEmail}
+module.exports = resetPasswordEmail

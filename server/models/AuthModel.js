@@ -3,20 +3,32 @@ const mongoose = require('mongoose');
 const authSchema = mongoose.Schema({
     name: {
         type: String,
-        require: [true, "SVP Entrer Votre Name"]
+        required: [true, 'Please ADD Name'],
+        trim: true
     },
     email: {
         type: String,
-        require: [true, "SVP Entrer Votre E-mail"]
+        required: [true, 'Please ADD Email'],
+        unique: true,
+        trim: true
     },
     password: {
         type: String,
-        require: [true, "SVP Entrer Votre Mot de passe"]
+        required: [true, 'Please ADD Email'],
+        trim: true,
+        min: 6,
+        max: 12
+    },
+    token: {
+        type: String,
+        unique: true
     },
     role: {
         type: String,
         default: "admin"
     },
+}, {
+    timestamps: true
 })
 
 module.exports = mongoose.model("Admin", authSchema);
