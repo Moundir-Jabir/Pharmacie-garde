@@ -12,6 +12,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(coockieparser())
 
+const connectBD = require('./config/db')
+connectBD()
+
 const PharmacieRouter = require('./routes/PharmacieRouter')
 const Authentification = require('./routes/AuthRouter')
 
