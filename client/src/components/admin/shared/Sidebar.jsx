@@ -32,6 +32,11 @@ function Sidebar() {
       name: "Commentaire",
       Link: "/dashboard/commentaires",
       icon: TfiComment,
+    },
+     {
+      name: "Commentaire",
+      Link: "/dashboard/commentaires",
+      icon: TfiComment,
     }
   ];
   const deconnecter = () => {

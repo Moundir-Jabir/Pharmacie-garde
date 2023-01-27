@@ -15,7 +15,6 @@ app.use(coockieparser())
 const connectBD = require('./config/db')
 connectBD()
 
-
 const PharmacieRouter = require('./routes/PharmacieRouter')
 const Authentification = require('./routes/AuthRouter')
 const ReviewRouter = require('./routes/ReviewRouter')
