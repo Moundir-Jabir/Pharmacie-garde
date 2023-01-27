@@ -4,7 +4,6 @@ const app = express();
 const errorHandler = require('./middlewares/errorHandler')
 
 
-
 const cors = require('cors');
 app.use(cors({ origin: true, credentials: true }));
 const coockieparser = require('cookie-parser')
@@ -22,14 +21,15 @@ const Authentification = require('./routes/AuthRouter')
 const ReviewRouter = require('./routes/ReviewRouter')
 
 app.use('/api/auth', Authentification);
+<<<<<<< HEAD
 app.use('/api/pharmacie', PharmacieRouter)
 app.use('/api/review', ReviewRouter)
 
+=======
+app.use('/api/pharmacie', PharmacieRouter);
+>>>>>>> 606850e9ae0a02b3f42b1e867464f313c4ff3317
 
 app.use(errorHandler)
-
-
-
 
 const port = process.env.PORT || 8084;
 

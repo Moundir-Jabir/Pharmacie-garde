@@ -1,19 +1,19 @@
 const mongoose = require('mongoose');
 
 const authSchema = mongoose.Schema({
-    Full_Name: {
+    name: {
         type: String,
         require: [true, "SVP Entrer Votre Name"]
     },
-    Email: {
+    email: {
         type: String,
         require: [true, "SVP Entrer Votre E-mail"]
     },
-    Password: {
+    password: {
         type: String,
         require: [true, "SVP Entrer Votre Mot de passe"]
     },
-    Role: {
+    role: {
         type: String,
         default: "admin"
     },
