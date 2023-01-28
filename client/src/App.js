@@ -14,7 +14,7 @@ function App() {
     <div>
       <Routes>
         <Route path='/' element={<PublicRoute> <LoginPage /> </PublicRoute>} />
-        <Route path='resetpassword' element={<PublicRoute><ResetPasswordPage /></PublicRoute>} />
+        <Route path='resetpassword/:token' element={<PublicRoute><ResetPasswordPage /></PublicRoute>} />
         <Route path='forgetpassword' element={<PublicRoute><ForgetPasswordPage /></PublicRoute>} />
         <Route path="dashboard/" element={<PrivateRoute><Layout /></PrivateRoute>}>
           <Route index element={<HomePage />} />
