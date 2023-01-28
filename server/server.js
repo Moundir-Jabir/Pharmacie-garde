@@ -18,18 +18,20 @@ connectBD()
 const PharmacieRouter = require('./routes/PharmacieRouter')
 const Authentification = require('./routes/AuthRouter')
 const ReviewRouter = require('./routes/ReviewRouter')
+const CommentaireRouter = require('./routes/CommentaireRouter')
 
 app.use('/api/auth', Authentification);
 app.use('/api/pharmacie', PharmacieRouter)
 app.use('/api/review', ReviewRouter)
+app.use('/api/commentaire', CommentaireRouter)
 
 
 app.use(errorHandler)
 
 const port = process.env.PORT || 8084;
 
-app.listen(port,(err)=>{
-    if(err) throw err;
+app.listen(port, (err) => {
+    if (err) throw err;
     console.log(`Server is running on port ${port}`);
 });
 
