@@ -54,7 +54,7 @@ const getAllReviewByIdPharmacie = async (req, res) => {
                     avgRating: { $avg: "$review" },
                 },
             },
-        ])   
+        ]).populate('review')
 
         return (res.status(200).json({
             getAllReview,
