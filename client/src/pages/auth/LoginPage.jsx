@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 import { login } from '../../features/authentification/authentificationSlice';
 
 function LoginPage() {
-  const [user, setUser] = useState({ Email: "", Password: "" })
+  const [user, setUser] = useState({ email: "", password: "" })
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -25,7 +25,7 @@ function LoginPage() {
     navigate('/dashboard')
   }
 
-  let { Email, Password } = user
+  let { email, password } = user
   return (
     <div
       className="hero min-h-screen bg-base-200 flex justify-end"
@@ -40,13 +40,13 @@ function LoginPage() {
                 <label className="label text-xs font-medium">
                   Adresse email - Format: exemple@mail.com
                 </label>
-                <Input value={Email} onChange={update} type="email" name="Email" id="Email" />
+                <Input value={email} onChange={update} type="email" name="email" id="Email" />
               </div>
               <div>
                 <label className="label text-xs font-medium">
                   Mot de passe
                 </label>
-                <Input value={Password} onChange={update} type="password" name="Password" id="Password" />
+                <Input value={password} onChange={update} type="password" name="password" id="Password" />
               </div>
               <div className="mt-2">
                 <Link
