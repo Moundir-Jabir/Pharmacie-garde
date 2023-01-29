@@ -100,19 +100,21 @@ const pharmacieSlice = createSlice({
         },
         [updatePharmacie.fulfilled]: (state,{payload})=>{
             return{
-             
-              pharmacies:state.pharmacies.map(phar => {
-                if(phar._id == payload._id){
-                    phar.adress = payload.adress;
-                    phar.date = payload.date;
-                    phar.name = payload.name;
-                    phar.phone = payload.phone;
-                    
+              ...state,
+              pharmacies: state.pharmacies.map(phar => {
+                if (phar._id === payload._id) {
+                  return {
+                    ...phar,
+                    adress: payload.adress,
+                    date: payload.date,
+                    name: payload.name,
+                    phone: payload.phone,
+                  };
                 }
-              } ),
-                loading: false
-            }
-        },
+                return phar;
+              }),
+            };
+          },
         [updatePharmacie.rejected]:(state)=>{
             
             console.log("response rejected");

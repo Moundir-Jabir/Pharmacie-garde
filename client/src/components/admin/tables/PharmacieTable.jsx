@@ -77,7 +77,7 @@ const UpdateAppartement = (id)=>{
               <td>{phar.name}</td>
               <td>{phar.address}</td>
               <td>{phar.phone}</td>
-              <td>{phar.date.slice(0,10)}</td>
+              <td>{phar.date?.slice(0,10)}</td>
               <td className="flex flex-row gap-2">
                 <button                 
                   className="btn btn-ghost btn-xs bg-color-primary text-white " 
