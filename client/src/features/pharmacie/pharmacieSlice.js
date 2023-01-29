@@ -8,12 +8,6 @@ export const getPharmacie = createAsyncThunk("pharmacie/getPharmacie",async ()=>
 })
 
 
-    // export const getOnePhar = createAsyncThunk("pharmacie/getPharmacie",async (id)=>{
-    //     console.log(id);
-    //     const res = await axios.get("http://localhost:8080/api/pharmacie/getPharmacie")
-    //     console.log(res);
-    //   return res.data.pharmacie
-    // })
 
 export const postPharmacie = createAsyncThunk('pharmacie/postPharmacie', async (data) => {
     const response = await axios.post('http://localhost:8080/api/pharmacie/createPharmacie', data);
@@ -30,8 +24,7 @@ export const deletePharmacie = createAsyncThunk('pharmacie/deletePharmacie', asy
 
 
 export const updatePharmacie = createAsyncThunk('pharmacie/updatePharmacie', async (id) => {
-    console.log(id);
-    const phaID = id.params.id
+    const phaID = id.id
     const data = id.dataUp
     
     const res = await axios.put(`http://localhost:8080/api/pharmacie/updatePharmacie/${phaID}`,data);
@@ -106,15 +99,12 @@ const pharmacieSlice = createSlice({
             console.log("pending",state.loading);
         },
         [updatePharmacie.fulfilled]: (state,{payload})=>{
-            console.log(payload);
             return{
-                ...state,
+             
               pharmacies:state.pharmacies.map(phar => {
-                if(phar._id== payload._id){
-
+                if(phar._id == payload._id){
                     phar.adress = payload.adress;
                     phar.date = payload.date;
-                    phar.image = payload.image;
                     phar.name = payload.name;
                     phar.phone = payload.phone;
                     

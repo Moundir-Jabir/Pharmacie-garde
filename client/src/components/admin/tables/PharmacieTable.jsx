@@ -61,9 +61,9 @@ const UpdateAppartement = (id)=>{
             </tr>
           </thead>
           <tbody>
-            {
-            loading? "loading....": pharmacies.map(phar =>(
-            <tr>
+            { loading ? 'loading....' :
+              pharmacies.map(phar =>(
+            <tr key={phar._id}>
               <td>
                 <div className="avatar">
                   <div className="mask mask-squircle w-12 h-12">
@@ -73,9 +73,7 @@ const UpdateAppartement = (id)=>{
                     />
                   </div>
                 </div>
-              </td>
-              
-              
+              </td>             
               <td>{phar.name}</td>
               <td>{phar.address}</td>
               <td>{phar.phone}</td>

@@ -1,78 +1,38 @@
-import {useState,useEffect } from "react";
+import {useState } from "react";
 import { Input, Button } from "../shared/index";
 import {Link, useParams ,useNavigate} from 'react-router-dom'
 import {updatePharmacie} from '../../../features/pharmacie/pharmacieSlice'
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import axios from "axios"
 
 
 function PharmacieUpdate() {
   
   const navigate = useNavigate()
-  const params = useParams()
+  const {id} = useParams()
+  const pharmacie  = useSelector(state => state.pharmacie.pharmacies.find( ({ _id }) => _id === id ))
+  const dispatch = useDispatch()
+  const [data, setData] = useState(pharmacie);
 
-  const [data, setData] = useState();
-  
-  // const [image, setimage] = useState('')
-  const [name, setname] = useState('')
-  const [address, setaddress] = useState('')
-  const [phone, setphone] = useState('')
-  const [date, setdate] = useState('')
-
-
-  useEffect(() => {
-    axios.get(`http://localhost:8080/api/pharmacie/getPharmacieById/${params.id}`)
-        .then((response) => {
-          setData(response.data.pharmacie)
-        })
-        .catch((error) => {
-             console.log(error)
-        })
-}, [params.id])
-
-// console.log(data);
-
-  //   const handleimage = (event) => {
-  //   setimage(event.target.value)
-  //   setData(event.target.value);
-  // } 
-
-  const handlename = (event) => {
-    setname(event.target.value)
-    setData(event.target.value);
+  const handle = (e) => {
+    setData({
+      ...data, [e.target.name]: e.target.value
+    })
   } 
-
-  const handleaddress = (event) => {
-    setaddress(event.target.value)
-    setData(event.target.value);
-  } 
-
   
-  const handlephone = (event) => {
-    setphone(event.target.value)
-    setData(event.target.value);
-  }
-  
-  const handledate = (event) => {
-    setdate(event.target.value)
-    setData(event.target.value);
-  } 
-
-  
-
-
-const dispatch = useDispatch()
 
 const handlSubmit = (e)=>{
   e.preventDefault();
   const dataUp = new FormData()
   // dataUp.append('image', image)
-  dataUp.append('name', name) 
-  dataUp.append('address',address) 
-  dataUp.append('phone',phone) 
-  dataUp.append('date',date)
+  dataUp.append('name', data.name) 
+  dataUp.append('address',data.address) 
+  dataUp.append('phone',data.phone) 
+  dataUp.append('date',data.date)
   
-  dispatch(updatePharmacie({params,dataUp}));
+  dispatch(updatePharmacie({id,dataUp}));
+   navigate('/dashboard/pharmacies')
+
 
 }
 
@@ -84,7 +44,7 @@ const handlSubmit = (e)=>{
           to={"/dashboard/pharmacies"}
           className="btn btn-active border-none hover:bg-color-primary bg-color-secondary "
         >
-          Afficher Pharmacies
+          Afficher Pharmacies 
         </Link>
       </div>
       <div className="overflow-auto flex flex-col items-center bg-white px-4 pt-3 pb-4 rounded-sm border border-gray-200 flex-1">
@@ -113,8 +73,8 @@ const handlSubmit = (e)=>{
                 type="text"
                 value={data?.name}
 
-                onChange={ handlename }
-                name="Name_Immeuble"
+                onChange={ handle }
+                name="name"
                 id="Name_Immeuble"
                 placeholder=""
               />
@@ -122,10 +82,10 @@ const handlSubmit = (e)=>{
             <div>
               <label className="label text-xs font-medium">Adresse</label>
               <Input
-                onChange={ handleaddress }
+                onChange={ handle }
                  value={data?.address}
                 type="text"
-                name="Number_Appartement"
+                name="address"
                 id="Number_Appartement"
                 placeholder=""
               />
@@ -135,10 +95,10 @@ const handlSubmit = (e)=>{
                 Numéro de téléphone
               </label>
               <Input
-                onChange={ handlephone }
+                onChange={ handle }
                 value={data?.phone}
                 type="text"
-                name="Number_Appartement"
+                name="phone"
                 id="Number_Appartement"
                 placeholder=""
               />
@@ -148,9 +108,9 @@ const handlSubmit = (e)=>{
                 date
               </label>
               <Input
-                onChange={ handledate }
+                onChange={ handle }
                 type="date"
-                name="Number_Appartement"
+                name="date"
                 value={data?.date?.slice(0,10)}
                 id="Number_Appartement"
                 placeholder=""

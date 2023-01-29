@@ -86,7 +86,7 @@ const updatePharmacie = tryCatch(async (req, res) => {
             phone: phone,
             address: address,
             date: date
-        })
+        },{new: true})
 
         if (!pharmacie) {
             throw new Error('pharmacie is not updated')
