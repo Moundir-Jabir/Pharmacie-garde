@@ -1,18 +1,23 @@
-import {useState } from "react";
-import { Input, Button } from "../shared/index";
-import { Link, useNavigate} from "react-router-dom";
-import {postPharmacie} from '../../../features/pharmacie/pharmacieSlice'
-import {useDispatch} from 'react-redux'
+import {useEffect} from "react";
+import { Link, useParams} from "react-router-dom";
+import {useDispatch,useSelector} from 'react-redux'
+import {getComment,deleteComme}from "../../../features/pharmacie/commentSlide"
+
 
 function PharmacieComments() {
 
- const navigate = useNavigate()
- const [date, setdate] = useState('')
+  const params = useParams()
+//  const navigate = useNavigate()
+//  const [date, setdate] = useState('')
  const dispatch = useDispatch()
-
-
-
+ const {comments} = useSelector(state=>state.comment) 
  
+ useEffect(()=>{
+   dispatch(getComment(params.id))
+ },[params.id])
+ 
+
+
  return (
     <div className="flex flex-col gap-3">
       <div className="flex flex-row justify-between items-center align-middle bg-white px-4 pt-3 pb-4 rounded-sm border border-gray-200 flex-1">
@@ -46,28 +51,27 @@ function PharmacieComments() {
               <th>Option</th>
             </tr>
           </thead>
-          {/* <tbody>
-            { loading ? 'loading....' :
-              pharmacies.map(phar =>(
-            <tr key={phar._id}>
-              <td>{phar.name}</td>
-              
+          <tbody>
+            { 
+              comments[0]?.map(com =>(
+              <tr key={com?._id}>
+              <td>{com?.clientname}</td>
+              <td>{com?.clientcomment}</td>
               <td className="flex flex-row gap-2">
                 <button                 
-                  className="btn btn-ghost btn-xs bg-color-primary text-white " 
-                  onClick={() => { DeleteComment(phar._id) }}
-                >
-                  Comments
+                  className="btn  btn-xs bg-color-primary text-white " 
+                  onClick={()=> dispatch(deleteComme(com?._id))}>               
+                  Delete
                 </button>
                
               </td>
             </tr>
   ))}
-          </tbody> */}
+          </tbody>
         </table>
       </div>
     </div>
   );
-}
+ }
 
 export default PharmacieComments;

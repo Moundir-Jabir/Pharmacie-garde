@@ -28,9 +28,7 @@ exports.addComment = async (req,res)=> {
 
 exports.getComment= async(req,res)=> {
     const id = req.params.id
-    console.log(id);
     const comment = await Comment.find({"commentID": id})
-    console.log(comment);
 
     if(comment){
         res.status(200)
@@ -41,3 +39,21 @@ exports.getComment= async(req,res)=> {
     }   
   
   }
+
+
+  exports.deleteComment = (async (req, res) => {
+    const id = req.params.id
+
+    const comment = await Comment.findByIdAndDelete({_id : id})
+
+    if(!comment){
+        res.status(400).json({mess : 'Not Found'})
+    }
+
+    return (
+        res.status(201).json({
+          comment,
+            mess : 'pharmacie delete successfuly'
+        })
+    )
+})

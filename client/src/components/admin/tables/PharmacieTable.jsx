@@ -9,7 +9,7 @@ import {useDispatch, useSelector} from "react-redux"
 function PharmacieTable() {
 
 const navigate = useNavigate();
-const {pharmacies,loading}= useSelector(state=>state.pharmacie) 
+const {pharmacies,loading}= useSelector(state=>state.pharmacie)
 const dispatch = useDispatch()
 
 useEffect(()=>{

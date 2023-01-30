@@ -7,7 +7,7 @@ const store = configureStore({
   reducer: {
     pharmacie : pharmReducer,
     auth: authReducer,
-    Comment : commentReducer
+    comment : commentReducer
     
   }
 });
