@@ -12,13 +12,11 @@ const { tryCatch } = require('../middlewares/tryCatch')
 
 const createPharmacie = tryCatch(async (req, res) => {
 
-   
 
-    const { name, address, phone, date } = req.body
+    const { name, address, phone, date_start, date_end } = req.body
+ 
 
-    console.log(req.body);
-
-    if (!name || !address || !phone || !date) {
+    if (!name || !address || !phone || !date_start || !date_end) {
       res.status(400).json({mess : 'Add All fileds'})
     }
     
@@ -37,10 +35,9 @@ const createPharmacie = tryCatch(async (req, res) => {
         name: name,
         phone: phone,
         address: address,
-        date: date
+        date_start: date_start,
+        date_end:date_end,
     })
-
-    console.log(pharmacie);
 
     if (!pharmacie) {
         res.status(400).json({mess :'pharmacie not created' })
@@ -62,27 +59,29 @@ const createPharmacie = tryCatch(async (req, res) => {
 const updatePharmacie = tryCatch(async (req, res) => {
     const id = req.params.id
 
-    const { name, address, phone, date } = req.body
+    const { name, address, phone, date_start, date_end } = req.body
+ 
 
-    if (!name || !address || !phone || !date) {
-        res.status(400).json({mess : 'Add All fileds'})
+    if (!name || !address || !phone || !date_start || !date_end) {
+      res.status(400).json({mess : 'Add All fileds'})
     }
 
-    const img = [];
-    await req.files.forEach((filePath) => {
-        const path = filePath.path.split("\\")
-        console.log(path);
-        const imgPath = "/" + path[1];
-        img.push(imgPath);
-    });
+    // const img = [];
+    // await req.files.forEach((filePath) => {
+    //     const path = filePath.path.split("\\")
+    //     console.log(path);
+    //     const imgPath = "/" + path[1];
+    //     img.push(imgPath);
+    // });
 
     const pharmacie = await PharmacieModel.findByIdAndUpdate({ _id: id },
         {
-            image: img,
+            // image: img,
             name: name,
             phone: phone,
             address: address,
-            date: date
+            date_start: date_start,
+            date_end:date_end,
         },{new: true})
 
 

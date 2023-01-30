@@ -28,7 +28,9 @@ const handlSubmit = (e)=>{
   dataUp.append('name', data.name) 
   dataUp.append('address',data.address) 
   dataUp.append('phone',data.phone) 
-  dataUp.append('date',data.date)
+  dataUp.append('date_start', data.date_start) 
+  dataUp.append('date_end', data.date_end) 
+  
   
   dispatch(updatePharmacie({id,dataUp}));
    navigate('/dashboard/pharmacies')
@@ -110,8 +112,22 @@ const handlSubmit = (e)=>{
               <Input
                 onChange={ handle }
                 type="date"
-                name="date"
-                value={data?.date?.slice(0,10)}
+                name="date_start"
+                value={data?.date_start?.slice(0,10)}
+                id="Number_Appartement"
+                placeholder=""
+              />
+            </div>
+
+            <div>
+              <label className="label text-xs font-medium">
+                date
+              </label>
+              <Input
+                onChange={ handle }
+                type="date"
+                name="date_end"
+                value={data?.date_end?.slice(0,10)}
                 id="Number_Appartement"
                 placeholder=""
               />

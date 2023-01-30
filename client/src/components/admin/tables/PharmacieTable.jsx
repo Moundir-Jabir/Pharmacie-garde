@@ -56,7 +56,9 @@ const updatePharmacie = (id)=>{
               <th>Nom</th>
               <th>Adress</th>
               <th>téléphone</th>
-              <th>heures d'ouverture</th>
+              <th>date d'ouverture</th>
+              <th>date de fermeture</th>
+
               <th>Option</th>
             </tr>
           </thead>
@@ -73,20 +75,22 @@ const updatePharmacie = (id)=>{
                     />
                   </div>
                 </div>
-              </td>             
-              <td>{phar.name}</td>
-              <td>{phar.address}</td>
-              <td>{phar.phone}</td>
-              <td>{phar.date?.slice(0,10)}</td>
+              </td>          
+              <td>{phar?.name}</td>
+              <td>{phar?.address}</td>
+              <td>{phar?.phone}</td>
+              <td>{phar?.date_start?.slice(0,10)}</td>
+              <td>{phar?.date_end?.slice(0,10)}</td>
+
               <td className="flex flex-row gap-2">
                 <button                 
                   className="btn btn-ghost btn-xs bg-color-primary text-white " 
-                  onClick={() => { updatePharmacie(phar._id) }}
+                  onClick={() => { updatePharmacie(phar?._id) }}
                 >
                   Modifier
                 </button>
                 <button className="btn btn-ghost btn-xs bg-red-600 text-white" 
-                onClick={()=> dispatch(deletePharmacie(phar._id))}>
+                onClick={()=> dispatch(deletePharmacie(phar?._id))}>
                   Suprimer
                 </button>
               </td>

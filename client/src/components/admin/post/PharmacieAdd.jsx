@@ -10,7 +10,9 @@ function PharmacieAdd() {
   const [name, setName] = useState('')
   const [address, setaddress] = useState('')
   const [phone, setphone] = useState('')
-  const [date, setdate] = useState('')
+  const [date_start, setdate] = useState('')
+  const [date_end, setdateEnd] = useState('')
+
 
  
 
@@ -24,7 +26,9 @@ const handlSubmit = (e)=>{
   data.append('name', name) 
   data.append('address', address) 
   data.append('phone', phone) 
-  data.append('date', date) 
+  data.append('date_start', date_start) 
+  data.append('date_end', date_end) 
+
 
   
   dispatch(postPharmacie(data));
@@ -101,10 +105,24 @@ const handlSubmit = (e)=>{
             </div>
             <div>
               <label className="label text-xs font-medium">
-                date
+                date d ouverte
               </label>
               <Input
                 onChange={(e) => { setdate(e.target.value) }}
+                type="datetime-local"
+                name="Number_Appartement"
+                id="Number_Appartement"
+                placeholder=""
+                required  
+              />
+            </div>
+
+            <div>
+              <label className="label text-xs font-medium">
+              date de fermeture	
+              </label>
+              <Input
+                onChange={(e) => { setdateEnd(e.target.value) }}
                 type="datetime-local"
                 name="Number_Appartement"
                 id="Number_Appartement"
