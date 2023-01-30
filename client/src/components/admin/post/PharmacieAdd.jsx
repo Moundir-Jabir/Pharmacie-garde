@@ -1,19 +1,18 @@
 import {useState } from "react";
 import { Input, Button } from "../shared/index";
-import { Link } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 import {postPharmacie} from '../../../features/pharmacie/pharmacieSlice'
 import {useDispatch} from 'react-redux'
 
 function PharmacieAdd() {
-
+  const navigate = useNavigate()
   const [pharImage, setpharImage] = useState('')
   const [name, setName] = useState('')
   const [address, setaddress] = useState('')
   const [phone, setphone] = useState('')
   const [date, setdate] = useState('')
 
-  
-
+ 
 
 const dispatch = useDispatch()
 
@@ -27,9 +26,10 @@ const handlSubmit = (e)=>{
   data.append('phone', phone) 
   data.append('date', date) 
 
-  console.log(data);
-
+  
   dispatch(postPharmacie(data));
+     navigate('/dashboard/pharmacies')
+
    
 
 }
@@ -58,6 +58,7 @@ const handlSubmit = (e)=>{
                 name="Name_Immeuble"
                 id="Name_Immeuble"
                 placeholder=""
+                required  
               />
             </div>
             <div>
@@ -70,6 +71,7 @@ const handlSubmit = (e)=>{
                 name="Name_Immeuble"
                 id="Name_Immeuble"
                 placeholder=""
+                required  
               />
             </div>
             <div>
@@ -81,6 +83,7 @@ const handlSubmit = (e)=>{
                 name="Number_Appartement"
                 id="Number_Appartement"
                 placeholder=""
+                required  
               />
             </div>
             <div>
@@ -93,6 +96,7 @@ const handlSubmit = (e)=>{
                 name="Number_Appartement"
                 id="Number_Appartement"
                 placeholder=""
+                required  
               />
             </div>
             <div>
@@ -105,6 +109,7 @@ const handlSubmit = (e)=>{
                 name="Number_Appartement"
                 id="Number_Appartement"
                 placeholder=""
+                required  
               />
             </div>
            

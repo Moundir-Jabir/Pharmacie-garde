@@ -18,12 +18,14 @@ connectBD()
 const PharmacieRouter = require('./routes/PharmacieRouter')
 const Authentification = require('./routes/AuthRouter')
 const ReviewRouter = require('./routes/ReviewRouter')
-const CommentaireRouter = require('./routes/CommentaireRouter')
+const CommenteRouter = require('./routes/CommentRouter')
 
 app.use('/api/auth', Authentification);
 app.use('/api/pharmacie', PharmacieRouter)
 app.use('/api/review', ReviewRouter)
-app.use('/api/commentaire', CommentaireRouter)
+app.use('/api/pharmacie', PharmacieRouter)
+app.use('/api/comment', CommenteRouter)
+
 
 
 app.use(errorHandler)

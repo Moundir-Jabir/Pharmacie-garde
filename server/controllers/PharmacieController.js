@@ -83,7 +83,7 @@ const updatePharmacie = tryCatch(async (req, res) => {
             phone: phone,
             address: address,
             date: date
-        })
+        },{new: true})
 
 
         return (
