@@ -17,7 +17,7 @@ useEffect(()=>{
 },[])
 
 
-const UpdateAppartement = (id)=>{
+const updatePharmacie = (id)=>{
  
   navigate (`/dashboard/pharmacieupdate/${id}`)
 }
@@ -81,7 +81,7 @@ const UpdateAppartement = (id)=>{
               <td className="flex flex-row gap-2">
                 <button                 
                   className="btn btn-ghost btn-xs bg-color-primary text-white " 
-                  onClick={() => { UpdateAppartement(phar._id) }}
+                  onClick={() => { updatePharmacie(phar._id) }}
                 >
                   Modifier
                 </button>

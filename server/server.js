@@ -14,8 +14,10 @@ app.use(express.json());
 app.use(coockieparser())
 
 const PharmacieRouter = require('./routes/PharmacieRouter')
-
+const CommenteRouter = require('./routes/CommentRouter')
 app.use('/api/pharmacie', PharmacieRouter)
+app.use('/api/comment', CommenteRouter)
+
 
 
 app.use(errorHandler)

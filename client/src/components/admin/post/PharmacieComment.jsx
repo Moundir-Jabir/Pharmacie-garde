@@ -1,28 +1,19 @@
-import {useEffect} from "react";
-import { Link ,useNavigate} from "react-router-dom";
-import { BiSearch } from "../../../assets/icons";
-import {getPharmacie}from "../../../features/pharmacie/pharmacieSlice"
-import {useDispatch, useSelector} from "react-redux"
+import {useState } from "react";
+import { Input, Button } from "../shared/index";
+import { Link, useNavigate} from "react-router-dom";
+import {postPharmacie} from '../../../features/pharmacie/pharmacieSlice'
+import {useDispatch} from 'react-redux'
+
+function PharmacieComments() {
+
+ const navigate = useNavigate()
+ const [date, setdate] = useState('')
+ const dispatch = useDispatch()
 
 
-function CommentTable() {
 
-const navigate = useNavigate();
-const {pharmacies,loading}= useSelector(state=>state.pharmacie) 
-const dispatch = useDispatch()
-
-useEffect(()=>{
-  dispatch(getPharmacie())
-},[])
-
-
-const getComments = (id)=>{
  
-  navigate (`/dashboard/getcomment/${id}`)
-}
-
-
-  return (
+ return (
     <div className="flex flex-col gap-3">
       <div className="flex flex-row justify-between items-center align-middle bg-white px-4 pt-3 pb-4 rounded-sm border border-gray-200 flex-1">
         <h1 className="text-2xl font-bold text-color-secondary">Liste Pharmacies</h1>
@@ -34,9 +25,7 @@ const getComments = (id)=>{
                 placeholder="Search…"
                 className="input input-bordered  text-black"
               />
-              <button className="btn btn-square border-none hover:bg-color-primary bg-color-secondary ">
-                <BiSearch size={24} />
-              </button>
+              
             </div>
           </div>
           <Link
@@ -52,11 +41,12 @@ const getComments = (id)=>{
           <thead>
             <tr>
              
-              <th>Nom</th>
+              <th>User Name</th>
+              <th>Comment</th>
               <th>Option</th>
             </tr>
           </thead>
-          <tbody>
+          {/* <tbody>
             { loading ? 'loading....' :
               pharmacies.map(phar =>(
             <tr key={phar._id}>
@@ -65,7 +55,7 @@ const getComments = (id)=>{
               <td className="flex flex-row gap-2">
                 <button                 
                   className="btn btn-ghost btn-xs bg-color-primary text-white " 
-                  onClick={() => { getComments(phar._id) }}
+                  onClick={() => { DeleteComment(phar._id) }}
                 >
                   Comments
                 </button>
@@ -73,11 +63,11 @@ const getComments = (id)=>{
               </td>
             </tr>
   ))}
-          </tbody>
+          </tbody> */}
         </table>
       </div>
     </div>
   );
 }
 
-export default CommentTable;
+export default PharmacieComments;

@@ -6,6 +6,7 @@ import Layout from './components/admin/shared/Layout';
 import{HomePage,PharmaciePage,CommentairePage} from './pages/admin/index'
 import {PharmacieAdd} from './components/admin/post/index'
 import PharmacieUpdate from './components/admin/post/PharmacieUpdate'
+import PharmacieComments from './components/admin/post/PharmacieComment';
 
 function App() {
   return (
@@ -20,6 +21,8 @@ function App() {
             <Route path='commentaires' element={<CommentairePage />} />
             <Route path='pharmacieadd' element={<PharmacieAdd />} />
             <Route path='pharmacieupdate/:id' element={<PharmacieUpdate />} />
+            <Route path='getcomment/:id' element={<PharmacieComments />} />
+
 
           </Route>
       </Routes>
