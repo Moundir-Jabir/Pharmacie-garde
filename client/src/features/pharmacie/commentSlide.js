@@ -10,13 +10,13 @@ export const getComment = createAsyncThunk("comment/getComment",async (id)=>{
     } catch (error) {
         throw new Error(error.message)
     }
-})
+});
 
 
 
 export const deleteComme = createAsyncThunk('comment/deleteComme', async (id) => {
-    await axios.delete(`localhost:8080/api/comment/deleteComment/${id}`);
- //    console.log(res.data.pharmacie);
+   await axios.delete(`http://localhost:8080/api/comment/deleteComment/${id}`);
+//    console.log(res.data);
      return id;
  });
  
@@ -37,11 +37,10 @@ extraReducers: {
     },
     [getComment.fulfilled]: (state,{payload}) => {
             return{
-                // ...state,
-                comments : [...state.comments, payload],
-                loading: false
+                    ...state,
+                    comments : payload,
+                    loading: false
             }
-    
 
     },
     [getComment.rejected]: (state, action) => {
@@ -55,10 +54,12 @@ extraReducers: {
         console.log("pending",state.loading);
     },
     [deleteComme.fulfilled]: (state,{payload})=>{
+
         return{
-            // ...state,
+            ...state,
           comments:state.comments.filter(com => com._id !== payload ),
-            loading: false
+            loading: false,
+            
         }
     },
     [deleteComme.rejected]:(state)=>{
