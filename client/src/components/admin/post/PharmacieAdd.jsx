@@ -1,19 +1,20 @@
 import {useState } from "react";
 import { Input, Button } from "../shared/index";
-import { Link } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 import {postPharmacie} from '../../../features/pharmacie/pharmacieSlice'
 import {useDispatch} from 'react-redux'
 
 function PharmacieAdd() {
-
+  const navigate = useNavigate()
   const [pharImage, setpharImage] = useState('')
   const [name, setName] = useState('')
   const [address, setaddress] = useState('')
   const [phone, setphone] = useState('')
-  const [date, setdate] = useState('')
+  const [date_start, setdate] = useState('')
+  const [date_end, setdateEnd] = useState('')
 
-  
 
+ 
 
 const dispatch = useDispatch()
 
@@ -25,11 +26,14 @@ const handlSubmit = (e)=>{
   data.append('name', name) 
   data.append('address', address) 
   data.append('phone', phone) 
-  data.append('date', date) 
+  data.append('date_start', date_start) 
+  data.append('date_end', date_end) 
 
-  console.log(data);
 
+  
   dispatch(postPharmacie(data));
+     navigate('/dashboard/pharmacies')
+
    
 
 }
@@ -58,6 +62,7 @@ const handlSubmit = (e)=>{
                 name="Name_Immeuble"
                 id="Name_Immeuble"
                 placeholder=""
+                required  
               />
             </div>
             <div>
@@ -70,6 +75,7 @@ const handlSubmit = (e)=>{
                 name="Name_Immeuble"
                 id="Name_Immeuble"
                 placeholder=""
+                required  
               />
             </div>
             <div>
@@ -81,6 +87,7 @@ const handlSubmit = (e)=>{
                 name="Number_Appartement"
                 id="Number_Appartement"
                 placeholder=""
+                required  
               />
             </div>
             <div>
@@ -93,11 +100,12 @@ const handlSubmit = (e)=>{
                 name="Number_Appartement"
                 id="Number_Appartement"
                 placeholder=""
+                required  
               />
             </div>
             <div>
               <label className="label text-xs font-medium">
-                date
+                date d ouverte
               </label>
               <Input
                 onChange={(e) => { setdate(e.target.value) }}
@@ -105,6 +113,21 @@ const handlSubmit = (e)=>{
                 name="Number_Appartement"
                 id="Number_Appartement"
                 placeholder=""
+                required  
+              />
+            </div>
+
+            <div>
+              <label className="label text-xs font-medium">
+              date de fermeture	
+              </label>
+              <Input
+                onChange={(e) => { setdateEnd(e.target.value) }}
+                type="datetime-local"
+                name="Number_Appartement"
+                id="Number_Appartement"
+                placeholder=""
+                required  
               />
             </div>
            

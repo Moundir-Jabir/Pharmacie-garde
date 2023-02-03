@@ -25,7 +25,7 @@ export const login = createAsyncThunk('auth/login', async (user) => {
                     positionClass: "toast-bottom-left"
                 })
             }
-            result = { token: false }
+            result = false
         })
     return result
 })

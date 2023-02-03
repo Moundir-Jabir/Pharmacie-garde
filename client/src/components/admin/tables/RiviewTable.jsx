@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react'
 import { useDispatch } from 'react-redux'
-import { getReview } from '../../../features/review/reviewSlice'
+import { getReview } from '../../../features/pharmacie/reviewSlice'
+
 
 
 function RiviewTable() {
