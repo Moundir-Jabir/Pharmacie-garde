@@ -5,6 +5,7 @@ import {getPharmacie}from "../../../features/pharmacie/pharmacieSlice"
 import {useDispatch, useSelector} from "react-redux"
 
 
+
 function CommentTable() {
 
 const navigate = useNavigate();
@@ -19,6 +20,7 @@ useEffect(()=>{
 const getComments = (id)=>{
  
   navigate (`/dashboard/getcomment/${id}`)
+  navigate (`/dashboard/getreview/${id}`)
 }
 
 
@@ -68,6 +70,15 @@ const getComments = (id)=>{
                   onClick={() => { getComments(phar._id) }}
                 >
                   Comments
+                </button>
+               
+              </td>
+              <td className="flex flex-row gap-2">
+                <button                 
+                  className="btn btn-ghost btn-xs bg-color-primary text-white " 
+                  onClick={() => { getComments(phar._id) }}
+                >
+                  Review
                 </button>
                
               </td>
