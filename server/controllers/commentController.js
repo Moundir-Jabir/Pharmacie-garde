@@ -53,7 +53,7 @@ exports.getComment= async(req,res)=> {
     return (
         res.status(201).json({
           comment,
-            mess : 'pharmacie delete successfuly'
+            mess : 'comment deleted successfuly'
         })
     )
 })

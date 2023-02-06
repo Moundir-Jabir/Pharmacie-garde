@@ -53,7 +53,7 @@ function PharmacieComments() {
           </thead>
           <tbody>
             { 
-              comments[0]?.map(com =>(
+              comments?.map(com =>(
               <tr key={com?._id}>
               <td>{com?.clientname}</td>
               <td>{com?.clientcomment}</td>
