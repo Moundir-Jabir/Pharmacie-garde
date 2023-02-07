@@ -9,18 +9,22 @@ export default function HomePage({ navigation }) {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.items}>
-                {/* <Text style={{ fontSize: 25, fontWeight: 'bold', marginTop: 50 }}>
-                    Welcome to Farmacie Finder
-                </Text> */}
-                <Image
-                    source={require('../assets/Logo_png.png')}
-                    style={{ width: 300, height: 300}}
-                />
+
+                <View>
+                    <Image
+                        onPress={() => navigation.navigate('profile')}
+                        source={require('../assets/Logo_png.png')}
+                        style={{ width: 300, height: 300 }}
+                    />
+                    <Text style={styles.title}>
+                        Welcome to Farmacies de garde
+                    </Text>
+                </View>
                 <TouchableHighlight
                     style={styles.button}
-                    onPress={() => navigation.navigate('profile')}
+                    onPress={() => navigation.navigate('menu')}
                 >
-                    <Text style={{ color: 'white', fontWeight: 'bold' }}>
+                    <Text style={{ color: '#00eda6', fontWeight: 'bold' }}>
                         Click Here to continue
                     </Text>
                 </TouchableHighlight>
@@ -44,13 +48,19 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
     button: {
-        backgroundColor: '#00BFFF',
+        backgroundColor: '#00608d',
         padding: 10,
         borderRadius: 5,
         width: 200,
         alignItems: 'center',
         marginTop: Platform.OS === 'android' ? 100 : 0,
     },
+    title: {
+        textAlign: 'center',
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: '#00608d',
+    }
 
 
 });
