@@ -17,7 +17,6 @@ export default function Pharmac({ navigation }) {
     const [search, setSearch] = useState('');
     
 
-    console.log(search);
     useEffect(() => {
         const url = 'http://192.168.137.1:8080/api/pharmacie/getAllPharmacie';
         axios.get(url)

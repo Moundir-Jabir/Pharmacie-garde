@@ -5,16 +5,10 @@ import { Modal, Portal, Button, Provider } from 'react-native-paper';
 import AntDesign from 'react-native-vector-icons/AntDesign'
 
 
-const SearchFilter = ({ data, search, navigation }) => {
-
-
-
-
+const SearchFilter = ({ data, search, route, navigation }) => {
 
   return (
     <View>
-
-
       <FlatList
         data={data} renderItem={({ item }) => {
           if (search === '') {
@@ -30,11 +24,6 @@ const SearchFilter = ({ data, search, navigation }) => {
                       <Text style={styles.cardPhone}> {item.phone}</Text>
                     </View>
                   </View>
-                  <TouchableOpacity onPress={() => navigation.navigate('home')}>
-                    <Text style={styles.itemO}>
-                      <AntDesign name="creditcard" size={35} color="#4d8a78" />
-                    </Text>
-                  </TouchableOpacity>
                 </View>
               </ScrollView>
 
@@ -53,11 +42,6 @@ const SearchFilter = ({ data, search, navigation }) => {
                       <Text style={styles.cardPhone}> {item.phone}</Text>
                     </View>
                   </View>
-                  <TouchableOpacity onPress={() => console.log(item._id)}>
-                    <Text style={styles.itemO}>
-                      <AntDesign name="creditcard" size={35} color="#4d8a78" />
-                    </Text>
-                  </TouchableOpacity>
                 </View>
               </ScrollView>
             )
@@ -99,7 +83,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
     marginLeft: 5,
   },
-  
+
 
 
 })
