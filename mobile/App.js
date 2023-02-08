@@ -10,14 +10,8 @@ import HomePage from './home/HomePage';
 import Pharmac from './app/Pharmac';
 import Details from './components/Details';
 import Header from './components/Header';
-
-
-
-
-
-
-
-
+import MapProxemity from './app/ProxemityScreen'
+import MapGarde from './app/PharmacyGardeScreen'
 
 
 const Stack = createNativeStackNavigator();
@@ -33,6 +27,9 @@ export default function App() {
           <Stack.Screen name="pharmacie" component={Pharmac} options={{ headerShown: false}}/>
           <Stack.Screen name="details" component={Details} options={{ headerShown: false}} />
           <Stack.Screen name="header" component={Header} options={{ headerShown: false}}/>
+          <Stack.Screen name="pharma" component={Pharmac} />
+          <Stack.Screen name="map" component={MapProxemity} options={{ headerShown: false}} />
+          <Stack.Screen name="maptwo" component={MapGarde} options={{ headerShown: false}} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
