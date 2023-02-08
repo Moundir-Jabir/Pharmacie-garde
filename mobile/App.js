@@ -8,6 +8,13 @@ import Menu from './app/Menu';
 import Profile from './app/Profile';
 import HomePage from './home/HomePage';
 import Pharmac from './app/Pharmac';
+import HomeScreen from './components/HomeScreen';
+import Header from './components/Header';
+
+
+
+
+
 
 
 
@@ -20,10 +27,12 @@ export default function App() {
     <SafeAreaProvider>
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: true }}>
+          {/* <Stack.Screen name="homePage" component={HomeScreen} options={{ headerShown: false}} /> */}
           <Stack.Screen name="home" component={HomePage} options={{ headerShown: false}} />
           <Stack.Screen name="profile" component={Profile} />
           <Stack.Screen name="menu" component={Menu} options={{ headerShown: false}} />
-          <Stack.Screen name="pharma" component={Pharmac} />
+          <Stack.Screen name="pharmacie" component={Pharmac} options={{ headerShown: false}}/>
+          <Stack.Screen name="header" component={Header} options={{ headerShown: false}}/>
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
