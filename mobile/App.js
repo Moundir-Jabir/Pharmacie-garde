@@ -8,9 +8,8 @@ import Menu from './app/Menu';
 import Profile from './app/Profile';
 import HomePage from './home/HomePage';
 import Pharmac from './app/Pharmac';
-
-
-
+import MapProxemity from './app/ProxemityScreen'
+import MapGarde from './app/PharmacyGardeScreen'
 
 
 const Stack = createNativeStackNavigator();
@@ -24,6 +23,10 @@ export default function App() {
           <Stack.Screen name="profile" component={Profile} />
           <Stack.Screen name="menu" component={Menu} options={{ headerShown: false}} />
           <Stack.Screen name="pharma" component={Pharmac} />
+          <Stack.Screen name="map" component={MapProxemity} options={{ headerShown: false}} />
+          <Stack.Screen name="maptwo" component={MapGarde} options={{ headerShown: false}} />
+
+
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>

@@ -29,7 +29,7 @@ export default function Menu({navigation}) {
                     <MaterialIcons name="local-hospital" size={30} color="#00eda6" />
                     <TouchableHighlight
                         style={styles.button}
-                        onPress={() => navigation.navigate('pharma')}
+                        onPress={() => navigation.navigate('map')}
                     >
                         <Text style={styles.itemO}>
                             Pharmacies à proximité
@@ -40,10 +40,10 @@ export default function Menu({navigation}) {
                     <Entypo name="location" size={30} color="#00eda6" />
                     <TouchableHighlight
                         style={styles.button}
-                        onPress={() => navigation.navigate('profile')}
+                        onPress={() => navigation.navigate('maptwo')}
                     >
                         <Text style={styles.itemO}>
-                            Votre aide est la bienvenue
+                         Pharmacies De Garde
                         </Text>
                     </TouchableHighlight>
                 </View>
