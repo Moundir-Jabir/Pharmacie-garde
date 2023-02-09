@@ -114,7 +114,7 @@ const handlSubmit = (e)=>{
               <Input
                 onChange={ handle }
                 value={data?.latitude}
-                type="Number"
+                type="Text"
                 name="latitude"
                 id="Number_Appartement"
                 placeholder=""
@@ -127,7 +127,7 @@ const handlSubmit = (e)=>{
               <Input
                 onChange={ handle }
                 value={data?.longtitude}
-                type="Number"
+                type="Text"
                 name="longtitude"
                 id="Number_Appartement"
                 placeholder=""

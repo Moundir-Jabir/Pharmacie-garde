@@ -23,8 +23,8 @@ const MainScreen = () => {
         {
           latitude: place.coords.latitude,
           longitude: place.coords.longitude,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.03,
+          latitudeDelta: 0.05,
+          longitudeDelta: 0.05
         }
       );
     })();

@@ -10,6 +10,8 @@ function PharmacieAdd() {
   const [name, setName] = useState('')
   const [address, setaddress] = useState('')
   const [phone, setphone] = useState('')
+  const [latitude, setlatitude] = useState('')
+  const [longtitude, setlongtitude] = useState('')
   const [date_start, setdate] = useState('')
   const [date_end, setdateEnd] = useState('')
 
@@ -26,6 +28,8 @@ const handlSubmit = (e)=>{
   data.append('name', name) 
   data.append('address', address) 
   data.append('phone', phone) 
+  data.append('latitude',latitude) 
+  data.append('longtitude',longtitude) 
   data.append('date_start', date_start) 
   data.append('date_end', date_end) 
 
@@ -101,6 +105,30 @@ const handlSubmit = (e)=>{
                 id="Number_Appartement"
                 placeholder=""
                 required  
+              />
+            </div>
+            <div>
+              <label className="label text-xs font-medium">
+              Latitude
+              </label>
+              <Input
+                onChange={(e) => { setlatitude(e.target.value) }}
+                type="Text"
+                name="latitude"
+                id="Number_Appartement"
+                placeholder=""
+              />
+            </div>
+            <div>
+              <label className="label text-xs font-medium">
+              Longtitude
+              </label>
+              <Input
+                onChange={(e) => { setlongtitude(e.target.value) }}
+                type="Text"
+                name="longtitude"
+                id="Number_Appartement"
+                placeholder=""
               />
             </div>
             <div>
