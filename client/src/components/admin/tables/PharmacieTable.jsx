@@ -56,8 +56,11 @@ const updatePharmacie = (id)=>{
               <th>Nom</th>
               <th>Adress</th>
               <th>téléphone</th>
-              <th>date d'ouverture</th>
-              <th>date de fermeture</th>
+              <th>Latitude</th>
+              <th>Longtitude</th>
+              <th>date d'ouvert</th>
+              <th>date de fermet</th>
+              
 
               <th>Option</th>
             </tr>
@@ -79,6 +82,8 @@ const updatePharmacie = (id)=>{
               <td>{phar?.name}</td>
               <td>{phar?.address}</td>
               <td>{phar?.phone}</td>
+              <td>{phar?.latitude}</td>
+              <td>{phar?.longtitude}</td>
               <td>{phar?.date_start?.slice(0,10)}</td>
               <td>{phar?.date_end?.slice(0,10)}</td>
 

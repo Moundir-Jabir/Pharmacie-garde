@@ -20,6 +20,14 @@ const PharmacieSchema = new Schema({
         type :String,
         required : true,
     },
+    latitude :{
+        type : Number,
+        required : true
+    },
+    longtitude :{
+        type : Number,
+        required : true
+    },
     date_start :{
         type : String,
         required : true

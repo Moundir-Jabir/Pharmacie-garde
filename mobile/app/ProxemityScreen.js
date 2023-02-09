@@ -8,8 +8,6 @@ const MainScreen = () => {
 
   const [position, setPosition] = useState();
   // const [errorMsg, setErrorMsg] = useState(null);
-
-
   
   useEffect(() => {
     (async () => {
@@ -31,8 +29,6 @@ const MainScreen = () => {
       );
     })();
   }, []);
-  console.log(position);
-
 
 //    // let text = 'Waiting..';
   // if (errorMsg) {
