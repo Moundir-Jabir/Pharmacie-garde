@@ -17,11 +17,11 @@ const createPharmacie = tryCatch(async (req, res) => {
 
 
     if (!name || !address || !phone || !date_start || !date_end) {
-        res.status(400).json({ mess: 'Add All fileds' })
+        res.status(400).json({ mess: 'Please Add All fileds' })
     }
 
     const img = [];
-    await req.files?.forEach((filePath) => {
+    await req.files.forEach((filePath) => {
         const path = filePath.path.split("\\")
         console.log(path);
         const imgPath = "/" + path[1];
@@ -112,25 +112,23 @@ const getAllPharmacie = tryCatch(async (req, res) => {
 
 
 /**
- * @api {get} api/pharmacies/getPharmacieById/:id
+ * @api {get} api/pharmacie/getPharmacieById/:id
  * @apiName getPharmacieById
  */
 
 const getPharmacieById = tryCatch(async (req, res) => {
-    const id = req.params.id
-
-    const pharmacie = await PharmacieModel.findById({ _id: id })
-
-    if (!pharmacie) {
-        res.status(400).json({ mess: 'Not Found' })
-    }
-
-    return (
-        res.status(200).json({
-            pharmacie
-        })
-    )
+ 
+    const pharmacie = await PharmacieModel.findById(req.params.id)
+   
+        if(!pharmacie){
+            res.status(400).send('Not Found')
+        }
+        else{
+            res.status(200).json({pharmacie})
+        }
+         
 })
+
 
 /**
  * @api {delete} api/pharmacies/deletePharmacie/:id

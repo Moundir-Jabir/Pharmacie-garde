@@ -16,6 +16,11 @@ const createReview = tryCatch(async (req, res) => {
         res.status(400).json({ mess: 'Please add review' })
     }
 
+    const pharma = await Pharmacie.findById({ _id: id })
+    if (!pharma) {
+       return res.status(400).json({ mess: 'Pharmacie not found' })
+    }
+
     const reviews = await ReviewModel.create({
         review: review,
         idPharamcie: id
@@ -33,15 +38,10 @@ const createReview = tryCatch(async (req, res) => {
 
 
 const getAllReviewByIdPharmacie = async (req, res) => {
-
     const id = req.params.id
-
     try {
-
         const pharma = await Pharmacie.findOne({ _id: id })
-     
         if(!pharma) return 
-
         const getAllReview = await ReviewModel.aggregate([
             {
                 $match: {
@@ -54,7 +54,7 @@ const getAllReviewByIdPharmacie = async (req, res) => {
                     avgRating: { $avg: "$review" },
                 },
             },
-        ]).populate('review')
+        ])
 
         return (res.status(200).json({
             getAllReview,

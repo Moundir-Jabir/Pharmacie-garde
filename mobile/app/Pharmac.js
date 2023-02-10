@@ -35,7 +35,7 @@ export default function Pharmac({ navigation }) {
             
             <View style={{ marginTop: 20  }}>
                 <TextInput value={search} onChangeText={text => setSearch(text)} style={{ height: 45, borderColor: 'gray', borderWidth: 2, width: 320, borderRadius: 10, padding: 15, marginBottom: 10 }} placeholder="Search ... " />
-                <SearchFilter data={pharma} search={search} setSearch={setSearch} />
+                <SearchFilter navigation={navigation} data={pharma} search={search} setSearch={setSearch} />
             </View>
 
           

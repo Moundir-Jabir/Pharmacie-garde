@@ -6,7 +6,7 @@ const ReviewSchema = new Schema({
     review : {
         type : Number,
         required : true,
-        enum: [0,1,2,3,4,5]
+        enum: [0,0.5,1,1.5,2,2.5,3,3.5,4,4.5,5,5.5]
     },
     idPharamcie : {
         type : mongoose.Types.ObjectId, 

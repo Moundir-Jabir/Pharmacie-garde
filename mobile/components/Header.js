@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, SafeAreaView, Image, TouchableHighlight } from 
 import React from 'react'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import { Link } from '@react-navigation/native'
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 
 
 const Header = ({ navigation }) => {
@@ -13,9 +14,11 @@ const Header = ({ navigation }) => {
                         <AntDesign name="leftcircle" size={30} color="#00eda6" />
                     </Text>
                 </Link>
-                
-                    <Image source={require('../assets/Logo_png.png')} style={{ width: 40, height: 40 }} />
-                
+                <Link to={'/map'} style={{}}>
+                    <FontAwesome5 name="map-marked-alt" size={30} color="#00eda6" />
+                </Link>
+                    {/* <Image source={require('../assets/Logo_png.png')} style={{ width: 40, height: 40 }} /> */}
+
             </View>
 
         </SafeAreaView>

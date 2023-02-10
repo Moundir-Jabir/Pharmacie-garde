@@ -24,6 +24,16 @@ const SearchFilter = ({ data, search, route, navigation }) => {
                       <Text style={styles.cardPhone}> {item.phone}</Text>
                     </View>
                   </View>
+                  <TouchableOpacity onPress={() => {
+                    navigation.navigate('details', {
+                      itemId: item._id
+                    });
+                  }}>
+                    <Text style={styles.itemO}>
+                      <AntDesign name="creditcard" size={35} color="#4d8a78" />
+                    </Text>
+
+                  </TouchableOpacity>
                 </View>
               </ScrollView>
 
@@ -42,6 +52,11 @@ const SearchFilter = ({ data, search, route, navigation }) => {
                       <Text style={styles.cardPhone}> {item.phone}</Text>
                     </View>
                   </View>
+                  <TouchableOpacity onPress={() => console.log(item._id)}>
+                    <Text style={styles.itemO}>
+                      <AntDesign name="creditcard" size={35} color="#4d8a78" />
+                    </Text>
+                  </TouchableOpacity>
                 </View>
               </ScrollView>
             )

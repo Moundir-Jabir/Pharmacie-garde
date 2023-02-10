@@ -12,6 +12,8 @@ import Details from './components/Details';
 import Header from './components/Header';
 import MapProxemity from './app/ProxemityScreen'
 import MapGarde from './app/PharmacyGardeScreen'
+import ReviewForm from './components/ReviewForm';
+
 
 
 const Stack = createNativeStackNavigator();
@@ -30,6 +32,7 @@ export default function App() {
           <Stack.Screen name="pharma" component={Pharmac} />
           <Stack.Screen name="map" component={MapProxemity} options={{ headerShown: false}} />
           <Stack.Screen name="maptwo" component={MapGarde} options={{ headerShown: false}} />
+          <Stack.Screen name="review" component={ReviewForm} options={{ headerShown: false}} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
