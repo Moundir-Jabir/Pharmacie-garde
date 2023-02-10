@@ -13,11 +13,11 @@ const { tryCatch } = require('../middlewares/tryCatch')
 const createPharmacie = tryCatch(async (req, res) => {
 
 
-    const { name, address, phone, date_start, date_end } = req.body
+    const { name, address, phone, date_start, date_end, latitude, longtitude } = req.body
+ 
 
-
-    if (!name || !address || !phone || !date_start || !date_end) {
-        res.status(400).json({ mess: 'Please Add All fileds' })
+    if (!name || !address || !phone || !date_start || !date_end || !latitude || !longtitude) {
+      res.status(400).json({mess : 'Add All fileds'})
     }
 
     const img = [];
@@ -34,7 +34,10 @@ const createPharmacie = tryCatch(async (req, res) => {
         phone: phone,
         address: address,
         date_start: date_start,
-        date_end: date_end,
+        date_end:date_end,
+        latitude:latitude,
+        longtitude:longtitude,
+
     })
 
     if (!pharmacie) {
@@ -57,11 +60,11 @@ const createPharmacie = tryCatch(async (req, res) => {
 const updatePharmacie = tryCatch(async (req, res) => {
     const id = req.params.id
 
-    const { name, address, phone, date_start, date_end } = req.body
+    const { name, address, phone, date_start, date_end, latitude, longtitude } = req.body
+ 
 
-
-    if (!name || !address || !phone || !date_start || !date_end) {
-        res.status(400).json({ mess: 'Add All fileds' })
+    if (!name || !address || !phone || !date_start || !date_end || !latitude || !longtitude) {
+        res.status(400).json({mess : 'Add All fileds'})
     }
 
     // const img = [];
@@ -79,8 +82,10 @@ const updatePharmacie = tryCatch(async (req, res) => {
             phone: phone,
             address: address,
             date_start: date_start,
-            date_end: date_end,
-        }, { new: true })
+            date_end:date_end,
+            latitude:latitude,
+            longtitude:longtitude,
+        },{new: true})
 
 
     return (

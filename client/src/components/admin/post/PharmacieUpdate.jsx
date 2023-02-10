@@ -28,6 +28,8 @@ const handlSubmit = (e)=>{
   dataUp.append('name', data.name) 
   dataUp.append('address',data.address) 
   dataUp.append('phone',data.phone) 
+  dataUp.append('latitude',data.latitude) 
+  dataUp.append('longtitude', data.longtitude) 
   dataUp.append('date_start', data.date_start) 
   dataUp.append('date_end', data.date_end) 
   
@@ -101,6 +103,32 @@ const handlSubmit = (e)=>{
                 value={data?.phone}
                 type="text"
                 name="phone"
+                id="Number_Appartement"
+                placeholder=""
+              />
+            </div>
+            <div>
+              <label className="label text-xs font-medium">
+              Latitude
+              </label>
+              <Input
+                onChange={ handle }
+                value={data?.latitude}
+                type="Text"
+                name="latitude"
+                id="Number_Appartement"
+                placeholder=""
+              />
+            </div>
+            <div>
+              <label className="label text-xs font-medium">
+              Longtitude
+              </label>
+              <Input
+                onChange={ handle }
+                value={data?.longtitude}
+                type="Text"
+                name="longtitude"
                 id="Number_Appartement"
                 placeholder=""
               />
