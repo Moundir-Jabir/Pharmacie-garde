@@ -15,46 +15,46 @@ export default Details = ({ route, navigation }) => {
 
   useEffect(() => {
     const url = `http://192.168.137.1:8080/api/pharmacie/getPharmacieById/${itemId}`;
-    console.log(url);
+    // console.log(url);
     axios.get(url)
       .then((response) => {
         setData(response.data.pharmacie);
-        // console.log(response);
+        console.log(response);
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   }, []);
 
   // comment
   useEffect(() => {
     const url = `http://192.168.137.1:8080/api/comment/getComment/${itemId}`;
-    console.log(url);
+    // console.log(url);
     axios.get(url)
       .then((response) => {
         setComment(response.data);
-        console.log(response.data);
+        // console.log(response.data);
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
-  }, []);
+  }, [comment]);
 
   //review
   useEffect(() => {
     const url = `http://192.168.137.1:8080/api/review/getAllReviewByIdPharmacie/${itemId}`;
-    console.log(url);
+    // console.log(url);
     axios.get(url)
       .then((response) => {
         setReview(response.data.getAllReview);
-        console.log(response.data.getAllReview);
+        // console.log(response.data.getAllReview);
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
-  }, []);
+  }, [review]);
 
-  console.log(review.avgRating);
+  // console.log(review.avgRating);
 
 
   return (
@@ -103,8 +103,8 @@ export default Details = ({ route, navigation }) => {
           </Card.Content>
 
           <Card.Actions>
-            <Button onPress={() => navigation.navigate('Comment', { itemId: itemId })}>Comment</Button>
-            <Button onPress={() => navigation.navigate('Review', { itemId: itemId })}>Review</Button>
+            <Button onPress={() => navigation.navigate('review', { itemId: itemId })}>Review</Button>
+            <Button onPress={() => navigation.navigate('comment', { itemId: itemId })}>Comment</Button>
           </Card.Actions>
 
         </ScrollView>

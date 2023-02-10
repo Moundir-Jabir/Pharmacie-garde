@@ -5,34 +5,33 @@ import axios from 'axios';
 
 
 
-const ReviewForm = ({route,navigation}) => {
+const CommentForm = ({route,navigation}) => {
 
     const { itemId } = route.params;
     const [name, setName] = useState('');
-    const [review, setReview] = useState('');
+    const [comment, setComment] = useState('');
     
     function messageToast(mess){
         ToastAndroid.show(mess, ToastAndroid.SHORT, ToastAndroid.CENTER);
     }
 
+    console.log(itemId);
 
-    const addReview = () => {
-        const url = `http://192.168.137.1:8080/api/review/createReview/${itemId}`
-        if (name == '' || review == '') {
+    const addcomment = () => {
+        const url = `http://192.168.137.1:8080/api/comment/addComment`
+        if (name == '' || comment == '') {
             messageToast('Please Add all the fields');
             return;
         }
-        if(review > 5){
-            messageToast('Review must be between 0 and 5');
-            return;
-        }
+        
         axios.post(url, {
-            name: name,
-            review: review,
+            clientname: name,
+            clientcomment: comment,
+            commentID: itemId
         })
             .then((response) => {
-                console.log(response.data.mess);
-                messageToast(response.data.mess);
+                console.log(response);
+                messageToast('Comment Added');
                 navigation.navigate('details', { itemId: itemId });
             })
             .catch((error) => { console.log(error)});
@@ -45,13 +44,15 @@ const ReviewForm = ({route,navigation}) => {
     <SafeAreaView style={styles.container}>
         <Card style={{ width: 320, height: 'auto', marginTop: 20, }}>
             <Card.Content>
-                <Title style={{ color: '#00eda6', fontWeight: 'bold', fontSize: 30, }}>Review</Title>
+                <Title style={{ color: '#00eda6', fontWeight: 'bold', fontSize: 30, }}>Comment</Title>
                 <View style={{ flexDirection: 'column', justifyContent: 'space-between', }}>
-                    <TextInput style={{ width: 300, height: 50, marginTop: 20, }} label="Name"  mode="outlined" value={name} onChangeText={(text) => setName(text)}/>
-                    <TextInput style={{ width: 300, height: 50, marginTop: 20, }} label="Review" mode="outlined" placeholder='0 -> 5' value={review} onChangeText={(text)=>setReview(text)} />
+
+                    <TextInput style={{ width: 300, height: 50, marginTop: 20, }} label="Name"  mode="outlined" value={name} onChangeText={(text) => setName(text)} />
+                    <TextInput style={{ width: 300, height: 50, marginTop: 20, }} label="comment" mode="outlined" value={comment} onChangeText={(text)=>setComment(text)} />
+                    
                 </View>
                 <Card.Actions style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 20, }}>
-                    <Button style={{ width: 100, height: 50, }} mode="contained" onPress={addReview}>
+                    <Button style={{ width: 100, height: 50, }} mode="contained" onPress={addcomment}>
                         Submit
                     </Button>
                     {/* <Button style={{ width: 100, height: 50, }} mode="contained" onPress={() => navigation.navigate('Home')}>
@@ -64,7 +65,7 @@ const ReviewForm = ({route,navigation}) => {
   )
 }
 
-export default ReviewForm
+export default CommentForm
 
 const styles = StyleSheet.create({
     container: {
