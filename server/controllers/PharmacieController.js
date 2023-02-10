@@ -162,4 +162,29 @@ const deletePharmacie = tryCatch(async (req, res) => {
 })
 
 
-module.exports = { createPharmacie, updatePharmacie, getAllPharmacie, getPharmacieById, deletePharmacie}
+
+
+const getOpenPharmacies = tryCatch(async (req, res) => {
+
+  const currentDate = new Date();
+  const openPharmacies = await PharmacieModel.find({
+    open_date: { $lte: currentDate },
+    close_date: { $gte: currentDate }
+  });
+
+  if(!openPharmacies){
+    res.status(400).json({mess : 'No Pharmacy Found'})
+}
+
+return (
+    res.status(201).json({
+        openPharmacies,
+        mess : 'pharmacie  de Guarde'
+    })
+)
+})
+
+
+
+
+module.exports = { createPharmacie, updatePharmacie, getAllPharmacie, getPharmacieById, deletePharmacie, getOpenPharmacies}
