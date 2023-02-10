@@ -1,3 +1,0 @@
-const GOOGLE_API_KEY = "AIzaSyA0gi8rI23RBYaEG13wBMcT1bI3mO78ryM"
-
-export { GOOGLE_API_KEY }
