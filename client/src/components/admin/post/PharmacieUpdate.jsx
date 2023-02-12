@@ -32,7 +32,8 @@ const handlSubmit = (e)=>{
   dataUp.append('longtitude', data.longtitude) 
   dataUp.append('date_start', data.date_start) 
   dataUp.append('date_end', data.date_end) 
-  
+  dataUp.append('status', data.status) 
+
   
   dispatch(updatePharmacie({id,dataUp}));
    navigate('/dashboard/pharmacies')
@@ -106,6 +107,27 @@ const handlSubmit = (e)=>{
                 id="Number_Appartement"
                 placeholder=""
               />
+            </div>
+            <div>
+              <label className="label text-xs font-medium">
+                Status
+              </label>
+              <select 
+              
+        name="status"       
+        onChange={ handle }
+        value={data?.status}
+        type="status" 
+        required 
+        className="mt-3 block w-full  rounded-none rounded-t-md border  px-3 py-2 text-gray-900  focus:z-10  focus:border-violet-900 focus:outline-none focus:ring-violet-900 sm:text-sm">
+        <option selected>Choose your status</option>
+        <option 
+        value="Garde" style={{color:"#153462"}}>Garde
+        </option>
+        <option 
+        value="NoGarde" style={{color:"#153462"}}>NoGarde
+        </option>
+        </select>
             </div>
             <div>
               <label className="label text-xs font-medium">

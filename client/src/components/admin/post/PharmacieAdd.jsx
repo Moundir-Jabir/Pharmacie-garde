@@ -14,6 +14,7 @@ function PharmacieAdd() {
   const [longtitude, setlongtitude] = useState('')
   const [date_start, setdate] = useState('')
   const [date_end, setdateEnd] = useState('')
+  const [status, setstatus] = useState('')
 
 
  
@@ -31,7 +32,9 @@ const handlSubmit = (e)=>{
   data.append('latitude',latitude) 
   data.append('longtitude',longtitude) 
   data.append('date_start', date_start) 
-  data.append('date_end', date_end) 
+  data.append('date_end', date_end)
+  data.append('status', status) 
+ 
 
 
   
@@ -101,11 +104,30 @@ const handlSubmit = (e)=>{
               <Input
                 onChange={(e) => { setphone(e.target.value) }}
                 type="text"
-                name="Number_Appartement"
-                id="Number_Appartement"
+                name="phone"
+                id="phone"
                 placeholder=""
                 required  
               />
+            </div>
+            <div>
+              <label className="label text-xs font-medium">
+                Statuss
+              </label>
+              <select 
+        name="status"       
+        onChange={(e) => { setstatus(e.target.value) }}
+        type="status" 
+        required 
+        className="mt-3 block w-full  rounded-none rounded-t-md border  px-3 py-2 text-gray-900  focus:z-10  focus:border-violet-900 focus:outline-none focus:ring-violet-900 sm:text-sm">
+        <option selected>Choose your status</option>
+        <option 
+        value="Garde" style={{color:"#153462"}}>Garde
+        </option>
+        <option 
+        value="NoGarde" style={{color:"#153462"}}>NoGarde
+        </option>
+        </select>
             </div>
             <div>
               <label className="label text-xs font-medium">
@@ -137,7 +159,7 @@ const handlSubmit = (e)=>{
               </label>
               <Input
                 onChange={(e) => { setdate(e.target.value) }}
-                type="datetime-local"
+                type="date"
                 name="Number_Appartement"
                 id="Number_Appartement"
                 placeholder=""
@@ -151,7 +173,7 @@ const handlSubmit = (e)=>{
               </label>
               <Input
                 onChange={(e) => { setdateEnd(e.target.value) }}
-                type="datetime-local"
+                type="date"
                 name="Number_Appartement"
                 id="Number_Appartement"
                 placeholder=""

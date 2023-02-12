@@ -13,10 +13,10 @@ const { tryCatch } = require('../middlewares/tryCatch')
 const createPharmacie = tryCatch(async (req, res) => {
 
 
-    const { name, address, phone, date_start, date_end, latitude, longtitude } = req.body
+    const { name, address, phone,status, date_start, date_end, latitude, longtitude } = req.body
  
 
-    if (!name || !address || !phone || !date_start || !date_end || !latitude || !longtitude) {
+    if (!name || !address || !phone ||!status|| !date_start || !date_end || !latitude || !longtitude) {
       res.status(400).json({mess : 'Add All fileds'})
     }
 
@@ -33,7 +33,8 @@ const createPharmacie = tryCatch(async (req, res) => {
         name: name,
         phone: phone,
         address: address,
-        date_start: date_start,
+        status:status,
+        date_start:date_start,
         date_end:date_end,
         latitude:latitude,
         longtitude:longtitude,
@@ -60,10 +61,10 @@ const createPharmacie = tryCatch(async (req, res) => {
 const updatePharmacie = tryCatch(async (req, res) => {
     const id = req.params.id
 
-    const { name, address, phone, date_start, date_end, latitude, longtitude } = req.body
+    const { name, address, phone,status, date_start, date_end, latitude, longtitude } = req.body
  
 
-    if (!name || !address || !phone || !date_start || !date_end || !latitude || !longtitude) {
+    if (!name || !address || !phone ||!status|| !date_start || !date_end || !latitude || !longtitude) {
         res.status(400).json({mess : 'Add All fileds'})
     }
 
@@ -81,6 +82,7 @@ const updatePharmacie = tryCatch(async (req, res) => {
             name: name,
             phone: phone,
             address: address,
+            status:status,
             date_start: date_start,
             date_end:date_end,
             latitude:latitude,
@@ -162,11 +164,8 @@ const deletePharmacie = tryCatch(async (req, res) => {
 
 const getOpenPharmacies = tryCatch(async (req, res) => {
 
-  const currentDate = new Date();
-  const openPharmacies = await PharmacieModel.find({
-    open_date: { $lte: currentDate },
-    close_date: { $gte: currentDate }
-  });
+  
+  const openPharmacies = await PharmacieModel.find({status: "Garde" });
 
   if(!openPharmacies){
     res.status(400).json({mess : 'No Pharmacy Found'})

@@ -27,13 +27,16 @@ const PharmacieSchema = new Schema({
     longtitude :{
         type : Number,
         required : true
+    }, status : {
+        type :String,
+        required : true,
     },
     date_start :{
-        type : String,
+        type : Date,
         required : true
     },
     date_end :{
-        type : String,
+        type : Date,
         required : true
     }
 })
