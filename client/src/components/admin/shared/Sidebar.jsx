@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import {
   HiMenuAlt2,
   HiMenuAlt3,
@@ -8,9 +9,15 @@ import {
   BiLogOutCircle,
   TfiHeartBroken,
   TfiComment,
+  AiOutlineStar,
+  BiPlusMedical,
+  BiMessageSquare
 } from "../../../assets/icons";
+import { logout } from "../../../features/authentification/authentificationSlice";
 
 function Sidebar() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const menus = [
     {
       name: "Dashboard",
@@ -21,16 +28,24 @@ function Sidebar() {
     {
       name: " Pharmacies",
       Link: "/dashboard/pharmacies",
-      icon: TfiHeartBroken,
+      icon: BiPlusMedical,
       margin: true,
     },
     {
       name: "Commentaire",
       Link: "/dashboard/commentaires",
-      icon: TfiComment,
+      icon: BiMessageSquare,
     },
-    { name: "Se déconnecter", Link: "/", icon: BiLogOutCircle, margin: true },
+    {
+      name: "Review",
+      Link: "/dashboard/review",
+      icon: AiOutlineStar,
+    },
   ];
+  const deconnecter = () => {
+    dispatch(logout());
+    navigate("/");
+  };
   const [open, setOpen] = useState(true);
   return (
     <div
@@ -79,6 +94,28 @@ function Sidebar() {
             </h2>
           </Link>
         ))}
+        <div
+          onClick={deconnecter}
+          className={`${
+            true && "mt-5"
+          } group flex items-center text-sm gap-3 font-medium p-2 hover:bg-red-600 rounded-md`}
+        >
+          <div>{React.createElement(BiLogOutCircle, { size: "24" })}</div>
+          <h2
+            className={`whitespace-pre duration-500 ${
+              !open && "opacity-0 translate-x-28 overflow-hideen"
+            }`}
+          >
+            Se déconnecter
+          </h2>
+          <h2
+            className={`${
+              open && "hidden"
+            } absolute left-48 bg-white font-semibold whitespace-pre text-gray-900 rounded-md drop-shadow-lg px-0 py-0 w-0 overflow-hidden group-hover:px-2 group-hover:py-1 group-hover:left-14 group-hover:duration-300 group-hover:w-fit  `}
+          >
+            Se déconnecter
+          </h2>
+        </div>
       </div>
     </div>
   );

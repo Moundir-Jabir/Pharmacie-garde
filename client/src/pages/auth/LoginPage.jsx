@@ -3,8 +3,29 @@ import { Link, useNavigate } from "react-router-dom";
 import BackgroundAuth from "../../assets/images/BackgoundAuth.jpg";
 import { Button, Input } from "../../components/auth/index";
 import { ToastContainer, toast } from "react-toastify";
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { login } from '../../features/authentification/authentificationSlice';
 
 function LoginPage() {
+  const [user, setUser] = useState({ email: "", password: "" })
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const update = (e) => {
+    setUser({
+        ...user,
+        [e.target.name]: e.target.value
+    })
+  }
+
+  const submit = (e) => {
+    e.preventDefault()
+    dispatch(login(user))
+    navigate('/dashboard')
+  }
+
+  let { email, password } = user
   return (
     <div
       className="hero min-h-screen bg-base-200 flex justify-end"
@@ -14,18 +35,18 @@ function LoginPage() {
         <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
           <div className="my-5 mx-3 px-3">
             <p className="text-2xl mb-6 font-bold">Connexion</p>
-            <form>
+            <form onSubmit={submit} >
               <div>
                 <label className="label text-xs font-medium">
                   Adresse email - Format: exemple@mail.com
                 </label>
-                <Input type="email" name="Email" id="Email" />
+                <Input value={email} onChange={update} type="email" name="email" id="Email" />
               </div>
               <div>
                 <label className="label text-xs font-medium">
                   Mot de passe
                 </label>
-                <Input type="password" name="Password" id="Password" />
+                <Input value={password} onChange={update} type="password" name="password" id="Password" />
               </div>
               <div className="mt-2">
                 <Link

@@ -1,47 +1,116 @@
-import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
+// import { Action } from "@remix-run/router"
+import axios from "axios"
 
-const itemSlice = createSlice({
-  name: "items",
-  initialState: [],
-  reducers: {
-    setItems: (state, action) => {
-      state = action.payload;
-    },
-    addItem: (state, action) => {
-      state.push(action.payload);
-    },
-    deleteItem: (state, action) => {
-      const index = state.findIndex(item => item.id === action.payload);
-      state.splice(index, 1);
-    },
-    updateItem: (state, action) => {
-      const index = state.findIndex(item => item.id === action.payload.id);
-      state[index] = action.payload;
-    }
-  }
+export const getPharmacie = createAsyncThunk("pharmacie/getPharmacie",async ()=>{
+    const res = await axios.get("http://localhost:8080/api/pharmacie/getAllPharmacie")
+  return res.data.pharmacie
+})
+
+
+
+export const postPharmacie = createAsyncThunk('pharmacie/postPharmacie', async (data) => {
+    const response = await axios.post('http://localhost:8080/api/pharmacie/createPharmacie', data);
+    return response.data.pharmacie;
+  
+})
+
+
+export const deletePharmacie = createAsyncThunk('pharmacie/deletePharmacie', async (id) => {
+   await axios.delete(`http://localhost:8080/api/pharmacie/deletePharmacie/${id}`);
+//    console.log(res.data.pharmacie);
+    return id;
 });
 
-export const { setItems, addItem, deleteItem, updateItem } = itemSlice.actions;
 
-export const fetchItems = () => async (dispatch) => {
-    const response = await axios.get("https:/items");
-    dispatch(setItems(response.data));
-}
+export const updatePharmacie = createAsyncThunk('pharmacie/updatePharmacie', async (id) => {
+    const phaID = id.id
+    const data = id.dataUp
+    
+    const res = await axios.put(`http://localhost:8080/api/pharmacie/updatePharmacie/${phaID}`,data);
+    console.log(res);
+     return res.data.pharmacie;
+ });
 
-export const postItem = (item) => async (dispatch) => {
-    await axios.post("http://localhost:8000/api/pharmacie/createPharmacie", item);
-    dispatch(addItem(item));
-}
 
-export const putItem = (item) => async (dispatch) => {
-    await axios.put(`https://your-api.com/items/${item.id}`, item);
-    dispatch(updateItem(item));
-}
 
-export const deleteItemApi = (id) => async (dispatch) => {
-    await axios.delete(`https://your-api.com/items/${id}`);
-    dispatch(deleteItem(id));
-}
+const pharmacieSlice = createSlice({
+    name :"pharmacie",
+    initialState : { 
+    pharmacies :[],
+    loading :false
+},
+    reducers :{},
+    extraReducers : {
+        //getPharmacie
+        [getPharmacie.pending]:(state)=>{
+            state.loading = true
+            console.log("pending",state.loading);
+        },
+        [getPharmacie.fulfilled]: (state,{payload})=>{
+            return{
+                ...state,
+                pharmacies : payload,
+                loading: false
+            }
+        },
+        [getPharmacie.rejected]:(state)=>{
+            console.log("response rejected");
+        },
 
-export default itemSlice.reducer;
+
+        //addPharmacie
+        [postPharmacie.pending]:(state)=>{
+            state.loading = true
+            console.log("pending",state.loading);
+        },
+        [postPharmacie.fulfilled]: (state,{payload})=>{
+            return{
+                ...state,
+                pharmacies : [...state.pharmacies, payload],
+                loading: false
+            }
+        },
+        [postPharmacie.rejected]:(state)=>{
+            console.log("response rejected");
+        },
+
+        //deletePharmacie
+
+        [deletePharmacie.pending]:(state)=>{
+            state.loading = true
+            console.log("pending",state.loading);
+        },
+        [deletePharmacie.fulfilled]: (state,{payload})=>{
+            return{
+                ...state,
+              pharmacies:state.pharmacies.filter(phar => phar._id !== payload ),
+                loading: false
+            }
+        },
+        [deletePharmacie.rejected]:(state)=>{
+            console.log("response rejected");
+        },
+
+         //updatePharmacie
+
+         [updatePharmacie.pending]:(state)=>{
+            state.loading = true
+            console.log("pending",state.loading);
+        },
+        [updatePharmacie.fulfilled]: (state,{payload})=>({
+            ...state,
+            pharmacies: state.pharmacies.map(phar => phar._id === payload._id ? 
+              { ...phar, ...payload } : phar)
+        }),
+
+        [updatePharmacie.rejected]:(state)=>{
+            
+            console.log("response rejected");
+         }
+
+    }
+})
+
+export default pharmacieSlice.reducer
+

@@ -1,15 +1,22 @@
-
 import { configureStore } from "@reduxjs/toolkit";
-import item, {fetchItems, postItem, putItem, deleteItemApi} from "./itemSlice";
+import authReducer from "../features/authentification/authentificationSlice";
+import pharmReducer from "../features/pharmacie/pharmacieSlice"
+
+import reviewReducer from "../features/pharmacie/reviewSlice";
+
+import commentReducer from  "../features/pharmacie/commentSlide"
+
 
 const store = configureStore({
   reducer: {
-    item
+    pharmacie : pharmReducer,
+    auth: authReducer,
+    review : reviewReducer,
+    comment : commentReducer
+    
+
   }
 });
 
-export const {dispatch} = store;
+export default store
 
-export const {fetchItems, postItem, putItem, deleteItemApi} = {fetchItems, postItem, putItem, deleteItemApi}
-
-export default store;

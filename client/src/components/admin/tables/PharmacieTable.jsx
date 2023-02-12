@@ -1,9 +1,28 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import {useEffect} from "react";
+import { Link ,useNavigate} from "react-router-dom";
 import { BiSearch } from "../../../assets/icons";
 import Pharmacie1 from "../../../assets/images/Pharmacie1.png";
+import {getPharmacie,deletePharmacie}from "../../../features/pharmacie/pharmacieSlice"
+import {useDispatch, useSelector} from "react-redux"
+
 
 function PharmacieTable() {
+
+const navigate = useNavigate();
+const {pharmacies,loading}= useSelector(state=>state.pharmacie)
+const dispatch = useDispatch()
+
+useEffect(()=>{
+  dispatch(getPharmacie())
+},[])
+
+
+const updatePharmacie = (id)=>{
+ 
+  navigate (`/dashboard/pharmacieupdate/${id}`)
+}
+
+
   return (
     <div className="flex flex-col gap-3">
       <div className="flex flex-row justify-between items-center align-middle bg-white px-4 pt-3 pb-4 rounded-sm border border-gray-200 flex-1">
@@ -35,14 +54,21 @@ function PharmacieTable() {
             <tr>
               <th>image</th>
               <th>Nom</th>
-              <th>Adresse</th>
+              <th>Adress</th>
               <th>téléphone</th>
-              <th>heures d'ouverture</th>
+              <th>Latitude</th>
+              <th>Longtitude</th>
+              <th>date d'ouvert</th>
+              <th>date de fermet</th>
+              
+
               <th>Option</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
+            { loading ? 'loading....' :
+              pharmacies.map(phar =>(
+            <tr key={phar._id}>
               <td>
                 <div className="avatar">
                   <div className="mask mask-squircle w-12 h-12">
@@ -52,23 +78,29 @@ function PharmacieTable() {
                     />
                   </div>
                 </div>
-              </td>
-              <td>test</td>
-              <td>test</td>
-              <td>test</td>
-              <td>test</td>
+              </td>          
+              <td>{phar?.name}</td>
+              <td>{phar?.address}</td>
+              <td>{phar?.phone}</td>
+              <td>{phar?.latitude}</td>
+              <td>{phar?.longtitude}</td>
+              <td>{phar?.date_start?.slice(0,10)}</td>
+              <td>{phar?.date_end?.slice(0,10)}</td>
+
               <td className="flex flex-row gap-2">
-                <Link
-                  to={"#"}
-                  className="btn btn-ghost btn-xs bg-color-primary text-white"
+                <button                 
+                  className="btn btn-ghost btn-xs bg-color-primary text-white " 
+                  onClick={() => { updatePharmacie(phar?._id) }}
                 >
                   Modifier
-                </Link>
-                <button className="btn btn-ghost btn-xs bg-red-600 text-white">
+                </button>
+                <button className="btn btn-ghost btn-xs bg-red-600 text-white" 
+                onClick={()=> dispatch(deletePharmacie(phar?._id))}>
                   Suprimer
                 </button>
               </td>
             </tr>
+  ))}
           </tbody>
         </table>
       </div>
