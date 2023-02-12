@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, SafeAreaView, ScrollView, Platform, Image, TouchableWithoutFeedback, Button, Alert, TouchableHighlight, TextInput } from 'react-native';
-import Fontisto from 'react-native-vector-icons/Fontisto'
-import Entypo from 'react-native-vector-icons/Entypo'
+
 import axios from 'axios'
 import SearchFilter from '../components/SearchFilter';
 import Header from '../components/Header';
@@ -13,16 +12,16 @@ import Header from '../components/Header';
 
 export default function Pharmac({ navigation }) {
 
-    const [pharma, setPharma] = useState([]);
+    const [pharma, setPharma] = useState();
     const [search, setSearch] = useState('');
     
 
     useEffect(() => {
-        const url = 'http://192.168.137.1:8080/api/pharmacie/getAllPharmacie';
+        const url = 'http://192.168.137.1:8080/api/pharmacie/getPharmaciesdeGarde';
         axios.get(url)
             .then((response) => {
-                setPharma(response.data.pharmacie);
-                console.log(response.data.pharmacie);
+                setPharma(response.data.openPharmacies);
+                console.log(response.data);
             })
             .catch((error) => {
                 console.log(error);

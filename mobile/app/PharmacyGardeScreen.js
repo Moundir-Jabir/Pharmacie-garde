@@ -1,25 +1,36 @@
 
 //////////////////////////////
 import React, {useState, useEffect} from 'react';
-import {StyleSheet} from 'react-native';
+import {StyleSheet,Dimensions } from 'react-native';
 import MapView, {Marker} from 'react-native-maps';
 import * as Location from 'expo-location';
-const MainScreen = () => {
+import axios from 'axios';
 
-  const [place, setPosition] = useState(null);
-  const [errorMsg, setErrorMsg] = useState(null);
+const Gardescreen = () => {  
 
-const data =[{
-  latitude: 10,
-  longitude: 10,
-  latitudeDelta: 0.001,
-  longitudeDelta: 0.001,
-},{
-  latitude: 11,
-  longitude: 11,
-  latitudeDelta: 0.001,
-  longitudeDelta: 0.001,
-}]
+
+
+
+  const [position, setPosition] = useState();
+  const [data, setData] = useState([]);
+
+  // const [errorMsg, setErrorMsg] = useState(null);
+
+// const { width, height } = Dimensions.get("window")
+
+// const ASPECT_RATIO = width / height
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const response = await axios.get('http://192.168.137.1:8080/api/pharmacie/getPharmaciesdeGarde');
+      setData((response.data.openPharmacies));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  fetchData();
+
+}, []);
   
   useEffect(() => {
     (async () => {
@@ -30,39 +41,54 @@ const data =[{
         return;
       }
 
-      let place = await Location.getCurrentPositionAsync({});
-      setPosition(place);
+      let place = await Location.getCurrentPositionAsync();
+      setPosition(
+        {
+          latitude: place.coords.latitude,
+          longitude: place.coords.longitude,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0922,
+        }
+      );
     })();
   }, []);
+
+//    // let text = 'Waiting..';
+  // if (errorMsg) {
+  //   text = errorMsg;
+  // } else if (location) {
+  //    location
   
 
-
-  console.log(place);
   return (
-
     <MapView
       style={styles.map}
-      initialRegion={place}
-  
+      initialRegion={position}
+      showsUserLocation={true}
+      showsMyLocationButton={true}
+      followsUserLocation={true}
+      showsCompass={true}
+      scrollEnabled={true}
+      zoomEnabled={true}
       pitchEnabled={true}
       rotateEnabled={true}>
-
-{data && data.length ? data.map((item) => {
-            return (
-               <Marker 
-                   coordinate={{
-                       latitude: item.latitude,
-                       longitude: item.longitude,
-                   }}
-                   title="Test Title"
-                   description="This is the test description"
-              />
-            )
-        }) : null}
-
+       {data.map((item) => {
+        return (
+           <Marker 
+               coordinate={{
+                   latitude: item.latitude,
+                   longitude: item.longtitude,
+               }}
+               title={item.name}
+               description={item.address}
+               pinColor={"#008000"}
+          />
+        )
+    })}
        </MapView>
   );
 }
+
 
 
 const styles = StyleSheet.create({
@@ -76,7 +102,7 @@ const styles = StyleSheet.create({
 
 
 
-export default MainScreen;
+export default Gardescreen;
 
 
 

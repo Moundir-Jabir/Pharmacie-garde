@@ -10,8 +10,8 @@ import HomePage from './home/HomePage';
 import Pharmac from './app/Pharmac';
 import Details from './components/Details';
 import Header from './components/Header';
-import MapProxemity from './app/ProxemityScreen'
-import MapGarde from './app/PharmacyGardeScreen'
+import MapProxemity from './app/PharmacyGardeScreen'
+import MapGarde from './app/proxemityScreen'
 import ReviewForm from './components/ReviewForm';
 import CommentForm from './components/CommentForm';
 
