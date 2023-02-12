@@ -19,11 +19,9 @@ const createPharmacie = tryCatch(async (req, res) => {
     if (!name || !address || !phone || !date_start || !date_end || !latitude || !longtitude) {
       res.status(400).json({mess : 'Add All fileds'})
     }
-    
-
 
     const img = [];
-    await req.files?.forEach((filePath) => {
+    await req.files.forEach((filePath) => {
         const path = filePath.path.split("\\")
         console.log(path);
         const imgPath = "/" + path[1];
@@ -43,7 +41,7 @@ const createPharmacie = tryCatch(async (req, res) => {
     })
 
     if (!pharmacie) {
-        res.status(400).json({mess :'pharmacie not created' })
+        res.status(400).json({ mess: 'pharmacie not created' })
     }
 
     return (
@@ -90,12 +88,12 @@ const updatePharmacie = tryCatch(async (req, res) => {
         },{new: true})
 
 
-        return (
-            res.status(201).json({
-                pharmacie,
-                mess : 'pharmacie update successfuly'
-            })
-        )
+    return (
+        res.status(201).json({
+            pharmacie,
+            mess: 'pharmacie update successfuly'
+        })
+    )
 
 })
 
@@ -110,7 +108,7 @@ const getAllPharmacie = tryCatch(async (req, res) => {
     const pharmacie = await PharmacieModel.find({})
 
     if (!pharmacie) {
-        res.status(400).json({mess : 'Not found'})
+        res.status(400).json({ mess: 'Not found' })
     }
 
     return res.status(200).json({ pharmacie })
@@ -119,25 +117,23 @@ const getAllPharmacie = tryCatch(async (req, res) => {
 
 
 /**
- * @api {get} api/pharmacies/getPharmacieById/:id
+ * @api {get} api/pharmacie/getPharmacieById/:id
  * @apiName getPharmacieById
  */
 
 const getPharmacieById = tryCatch(async (req, res) => {
-     const id = req.params.id
-
-     const pharmacie = await PharmacieModel.findById({_id : id})
-
-     if(!pharmacie){
-        res.status(400).json({mess : 'Not Found'})
-     }
-
-     return (
-        res.status(200).json({
-            pharmacie
-        })
-     )
+ 
+    const pharmacie = await PharmacieModel.findById(req.params.id)
+   
+        if(!pharmacie){
+            res.status(400).send('Not Found')
+        }
+        else{
+            res.status(200).json({pharmacie})
+        }
+         
 })
+
 
 /**
  * @api {delete} api/pharmacies/deletePharmacie/:id
@@ -147,16 +143,16 @@ const getPharmacieById = tryCatch(async (req, res) => {
 const deletePharmacie = tryCatch(async (req, res) => {
     const id = req.params.id
 
-    const pharmacie = await PharmacieModel.findByIdAndDelete({_id : id})
+    const pharmacie = await PharmacieModel.findByIdAndDelete({ _id: id })
 
-    if(!pharmacie){
-        res.status(400).json({mess : 'Not Found'})
+    if (!pharmacie) {
+        res.status(400).json({ mess: 'Not Found' })
     }
 
     return (
         res.status(201).json({
             pharmacie,
-            mess : 'pharmacie delete successfuly'
+            mess: 'pharmacie delete successfuly'
         })
     )
 })

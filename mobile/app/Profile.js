@@ -9,7 +9,7 @@ export default function Profile({ navigation }) {
     return(
         <SafeAreaView style={styles.container}>
             <Text style={styles.text}>Welcome to the Profile</Text>
-            <Button title="Go to Home Page" onPress={() => navigation.navigate('home')} />
+            <Button title="Go to Home Page" onPress={() => navigation.navigate('homePage')} />
         </SafeAreaView>
     )
 }
@@ -23,3 +23,6 @@ const styles = StyleSheet.create({
     },
 
 });
+
+
+//rfnes for create a new component
