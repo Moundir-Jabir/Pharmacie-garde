@@ -1,0 +1,21 @@
+{
+    "translation" : {
+        "Setting" : "Setting",
+        "langue" : "language",
+        "notification" : "notification",
+        "favorite" : "favorite",
+        "search" : "Find a pharmacy here ... ",
+        "desc" : "It's easy to find pharmacy that is near to your location. With just one tap.",
+        "btnStart" : "Get Started", 
+        "addReview" : "Add Review",
+        "placeholderReview" : "write your review here",
+        "cancel" : "cancel",
+        "add" : "add",
+        "username" : "username",
+        "wait" : "wait ...",
+        "sure" : "Are your sure?",
+        "CofimrDelete" : "Are you sure you want to remove this pharmacy?",
+        "Yes" : "Yes",
+        "No" : "No"
+    }
+}

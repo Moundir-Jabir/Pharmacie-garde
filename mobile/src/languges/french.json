@@ -1,0 +1,23 @@
+{
+    "translation" : {
+        "Setting" : "paramètre",
+        "langue" : "langue", 
+        "notification" : "notification",
+        "favorite" : "préférée",
+        "search" : "Trouvez une pharmacie ici ...",
+        "desc" : "Il est facile de trouver une pharmacie proche de chez vous. Avec un seul robinet.",
+        "btnStart" : "Commencer",
+        "addReview" : "ajoute commentaire",
+        "placeholderReview" : "Donnez votre avis ici",
+        "cancel" : "Annuler",
+        "add" : "Ajouter",
+        "username" : "nom d'utilisateur",
+        "wait" : "attendez ...",
+        "sure": "Êtes-vous sûr?",
+        "CofimrDelete": "Voulez-vous vraiment supprimer cette pharmacie ?",
+        "Yes" : "Oui",
+        "No" : "Non"
+
+
+    }
+}
